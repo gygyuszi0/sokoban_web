@@ -15,12 +15,12 @@ import jakarta.validation.Valid;
 @RestController
 public class MapEndpoints {
 
-    @PostMapping("/add_map")
-    MapResponse addMap(){
+    @PostMapping("/create_map")
+    MapResponse createMap(){
         return new MapResponse();
     }
-    @GetMapping("/get_map/{id}")
-    MapResponse getMap(@PathVariable("id") Long id){
+    @GetMapping("/read_map/{id}")
+    MapResponse readMap(@PathVariable("id") Long id){
         return  new MapResponse();
     }
     @PutMapping("/update_map/{id}")
