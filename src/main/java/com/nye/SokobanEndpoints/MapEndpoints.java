@@ -7,28 +7,28 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nye.SokobanApp.AppDto.MapRequest;
-import com.nye.SokobanApp.AppDto.MapResponse;
+// import com.nye.SokobanApp.AppDto.MapRequest;
+// import com.nye.SokobanApp.AppDto.MapResponse;
 
-import jakarta.validation.Valid;
+// import jakarta.validation.Valid;
 
-@RestController
-public class MapEndpoints {
+// @RestController
+// public class MapEndpoints {
 
-    @PostMapping("/add_map")
-    MapResponse addMap(){
-        return new MapResponse();
-    }
-    @GetMapping("/get_map/{id}")
-    MapResponse getMap(@PathVariable("id") Long id){
-        return  new MapResponse();
-    }
-    @PutMapping("/update_map/{id}")
-    MapResponse updateMap(@PathVariable("id") Long id, @RequestBody @Valid MapRequest newMap){
-        return new MapResponse();
-    }
-    @DeleteMapping("/delete_map/{id}")
-    MapResponse deleteMap(@PathVariable("id") Long id){
-        return new MapResponse();
-    }
-}
+//     @PostMapping("/add_map")
+//     MapResponse addMap(){
+//         return new MapResponse();
+//     }
+//     @GetMapping("/get_map/{id}")
+//     MapResponse getMap(@PathVariable("id") Long id){
+//         return  new MapResponse();
+//     }
+//     @PutMapping("/update_map/{id}")
+//     MapResponse updateMap(@PathVariable("id") Long id, @RequestBody @Valid MapRequest newMap){
+//         return new MapResponse();
+//     }
+//     @DeleteMapping("/delete_map/{id}")
+//     MapResponse deleteMap(@PathVariable("id") Long id){
+//         return new MapResponse();
+//     }
+// }
