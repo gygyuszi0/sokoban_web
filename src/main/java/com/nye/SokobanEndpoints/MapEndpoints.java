@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nye.SokobanApp.AppDto.MapRequest;
-import com.nye.SokobanApp.AppDto.MapResponse;
+// import com.nye.SokobanApp.AppDto.MapRequest;
+// import com.nye.SokobanApp.AppDto.MapResponse;
 
-import jakarta.validation.Valid;
+// import jakarta.validation.Valid;
 
-@RestController
-public class MapEndpoints {
+// @RestController
+// public class MapEndpoints {
 
     @PostMapping("/create_map")
     MapResponse createMap(){
