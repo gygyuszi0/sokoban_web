@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AppUser {
-    String passWord;
-    String realName;
+public class AppUserGetter {
+    String userName;
 }
