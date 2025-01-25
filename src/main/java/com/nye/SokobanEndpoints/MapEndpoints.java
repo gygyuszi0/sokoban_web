@@ -37,8 +37,4 @@ public class MapEndpoints {
     DeleteMapResponse deleteMap(@PathVariable("id") Long id){
         return new DeleteMapResponse();
     }
-    @GetMapping("ping")
-    Integer ping(){
-        return 0;
-    }
 }
