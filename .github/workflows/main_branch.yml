@@ -4,7 +4,7 @@
 name: Main workflow
 
 on:
-    merge:
+    push:
         branches:
             - main
 
