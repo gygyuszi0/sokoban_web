@@ -6,7 +6,7 @@ name: Feature workflow
 on:
     push:
         branches:
-            - "develep"
+            - "develop"
 
 jobs:
     build:
