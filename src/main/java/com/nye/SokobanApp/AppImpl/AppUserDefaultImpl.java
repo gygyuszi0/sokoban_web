@@ -14,7 +14,7 @@ public class AppUserDefaultImpl implements AppUserInterface {
     @Override
     public AppCreateUserResponse createUser(CreateUserRequest request) {
         // TODO Auto-generated method stub
-        return null;
+        return new AppCreateUserResponse();
     }
 
     @Override
@@ -26,13 +26,13 @@ public class AppUserDefaultImpl implements AppUserInterface {
     @Override
     public AppReadUserResponse readUser(ReadUserRequest request) {
         // TODO Auto-generated method stub
-        return null;
+        return new AppReadUserResponse();
     }
 
     @Override
     public AppUpdateUserResponse updateUser(UpdateUserRequest request) {
         // TODO Auto-generated method stub
-        return null;
+        return new AppUpdateUserResponse();
     }
     
 }

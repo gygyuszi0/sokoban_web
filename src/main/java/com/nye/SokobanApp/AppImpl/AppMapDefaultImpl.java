@@ -12,7 +12,7 @@ public class AppMapDefaultImpl implements AppMapInterface {
     @Override
     public Long createMap(CreateMapRequest map) {
         // TODO Auto-generated method stub
-        return null;
+        return new Long(0);
     }
 
     @Override
@@ -24,13 +24,13 @@ public class AppMapDefaultImpl implements AppMapInterface {
     @Override
     public ReadMapResponse readMap(ReadMapRequest map) {
         // TODO Auto-generated method stub
-        return null;
+        return new ReadMapResponse();
     }
 
     @Override
     public UpdateMapResponse updateMap(Long mapId, UpdateMapRequest map) {
         // TODO Auto-generated method stub
-        return null;
+        return new UpdateMapResponse();
     }
     
 }

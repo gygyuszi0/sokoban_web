@@ -14,7 +14,7 @@ public class AppScoreDefaultImpl implements AppScoreInterface {
     @Override
     public AppCreateScoreResponse createScore(AppCreateScoreRequest request) {
         // TODO Auto-generated method stub
-        return null;
+        return new AppCreateScoreResponse();
     }
 
     @Override
@@ -26,13 +26,13 @@ public class AppScoreDefaultImpl implements AppScoreInterface {
     @Override
     public AppReadScoreResponse readScore(AppReadScoreRequest request) {
         // TODO Auto-generated method stub
-        return null;
+        return new AppReadScoreResponse();
     }
 
     @Override
     public AppUpdateScoreResponse updateScore(AppUpdateScoreRequest request) {
         // TODO Auto-generated method stub
-        return null;
+        return new AppUpdateScoreResponse();
     }
     
 }
