@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build - mvn",
+			"type": "shell",
+			"command": "mvn",
+			"args": [
+				"compile"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/sokoban-web"
+			},
+			"problemMatcher": []
+		}
+	]
+}
