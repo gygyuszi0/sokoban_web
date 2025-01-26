@@ -9,7 +9,7 @@
 				"compile"
 			],
 			"options": {
-				"cwd": "${workspaceFolder}/sokoban-web"
+				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": []
 		}
