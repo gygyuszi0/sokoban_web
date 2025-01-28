@@ -1,7 +1,9 @@
 package com.nye.SokobanApp.AppImpl;
 
 import com.nye.SokobanApp.AppDto.AppRequest.AppMapRequest.CreateMapRequest;
+import com.nye.SokobanApp.AppDto.AppRequest.AppMapRequest.DeleteMapRequest;
 import com.nye.SokobanApp.AppDto.AppRequest.AppMapRequest.ReadMapRequest;
+import com.nye.SokobanApp.AppDto.AppResponse.AppMapResponse.CreateMapResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppMapResponse.ReadMapResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppMapResponse.UpdateMapResponse;
 import com.nye.SokobanApp.AppInterface.AppMapInterface;
@@ -10,15 +12,14 @@ import com.nye.SokobanApp.AppInterface.UpdateMapRequest;
 public class AppMapDefaultImpl implements AppMapInterface {
 
     @Override
-    public Long createMap(CreateMapRequest map) {
+    public CreateMapResponse createMap(CreateMapRequest map) {
         // TODO Auto-generated method stub
         return new Long(0);
     }
 
     @Override
-    public void deleteMap(Long mapId) {
+    public void deleteMap(DeleteMapRequest map) {
         // TODO Auto-generated method stub
-        
     }
 
     @Override
@@ -28,7 +29,7 @@ public class AppMapDefaultImpl implements AppMapInterface {
     }
 
     @Override
-    public UpdateMapResponse updateMap(Long mapId, UpdateMapRequest map) {
+    public UpdateMapResponse updateMap(UpdateMapRequest map) {
         // TODO Auto-generated method stub
         return new UpdateMapResponse();
     }
