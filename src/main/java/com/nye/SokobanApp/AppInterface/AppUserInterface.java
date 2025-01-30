@@ -1,5 +1,7 @@
 package com.nye.SokobanApp.AppInterface;
 
+import org.springframework.stereotype.Service;
+
 import com.nye.SokobanApp.AppDto.AppRequest.AppUserRequest.CreateUserRequest;
 import com.nye.SokobanApp.AppDto.AppRequest.AppUserRequest.DeleteUserRequest;
 import com.nye.SokobanApp.AppDto.AppRequest.AppUserRequest.ReadUserRequest;
@@ -8,6 +10,7 @@ import com.nye.SokobanApp.AppDto.AppResponse.AppUserResponse.AppCreateUserRespon
 import com.nye.SokobanApp.AppDto.AppResponse.AppUserResponse.AppReadUserResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppUserResponse.AppUpdateUserResponse;
 
+@Service
 public interface AppUserInterface {
     public AppCreateUserResponse createUser(CreateUserRequest request);
     public AppReadUserResponse readUser(ReadUserRequest request);
