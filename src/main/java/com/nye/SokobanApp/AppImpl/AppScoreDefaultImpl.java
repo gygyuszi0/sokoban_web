@@ -1,14 +1,20 @@
 package com.nye.SokobanApp.AppImpl;
 
+import com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest.AppCreateScoreRequest;
+import com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest.AppReadScoreRequest;
+import com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest.AppScoreDeleteRequest;
 import com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest.AppUpdateScoreRequest;
 import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppCreateScoreResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppReadScoreResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppUpdateScoreResponse;
-import com.nye.SokobanApp.AppInterface.AppCreateScoreRequest;
-import com.nye.SokobanApp.AppInterface.AppDeleteScoreRequest;
-import com.nye.SokobanApp.AppInterface.AppReadScoreRequest;
 import com.nye.SokobanApp.AppInterface.AppScoreInterface;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
+@NoArgsConstructor
+//@AllArgsConstructor
 public class AppScoreDefaultImpl implements AppScoreInterface {
 
     @Override
@@ -18,7 +24,7 @@ public class AppScoreDefaultImpl implements AppScoreInterface {
     }
 
     @Override
-    public void deleteScore(AppDeleteScoreRequest request) {
+    public void deleteScore(AppScoreDeleteRequest request) {
         // TODO Auto-generated method stub
         
     }

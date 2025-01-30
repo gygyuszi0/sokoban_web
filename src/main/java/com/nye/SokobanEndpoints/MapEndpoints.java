@@ -14,7 +14,6 @@ import com.nye.SokobanApp.AppDto.AppRequest.AppMapRequest.DeleteMapRequest;
 import com.nye.SokobanApp.AppDto.AppRequest.AppMapRequest.ReadMapRequest;
 import com.nye.SokobanApp.AppDto.AppRequest.AppMapRequest.UpdateMapRequest;
 import com.nye.SokobanApp.AppDto.AppResponse.AppMapResponse.CreateMapResponse;
-import com.nye.SokobanApp.AppDto.AppResponse.AppMapResponse.DeleteMapResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppMapResponse.ReadMapResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppMapResponse.UpdateMapResponse;
 import com.nye.SokobanApp.AppInterface.AppMapInterface;
@@ -43,8 +42,8 @@ public class MapEndpoints {
         return mapService.updateMap(newMap);
     }
     @DeleteMapping("/delete/{id}")
-    DeleteMapResponse deleteMap(@PathVariable("id") Long id){
+    void deleteMap(@PathVariable("id") Long id){
         DeleteMapRequest request = DeleteMapRequest.builder().id(id).build();
-        return mapService.deleteMap(request);
+        mapService.deleteMap(request);
     }
 }

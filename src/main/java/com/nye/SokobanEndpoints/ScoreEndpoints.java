@@ -1,22 +1,16 @@
 package com.nye.SokobanEndpoints;
 
+import com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest.AppScoreDeleteRequest;
+import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppUpdateScoreResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest.AppCreateScoreRequest;
 import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppCreateScoreResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppReadScoreResponse;
 import com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest.AppReadScoreRequest;
 import com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest.AppUpdateScoreRequest;
-import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppUpdateScoreRespons;
 import com.nye.SokobanApp.AppInterface.AppScoreInterface;
-import com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest.AppDeleteScoreRequest;
 
 
 
@@ -40,15 +34,15 @@ public class ScoreEndpoints {
     }
 
     @PutMapping("/update/{map_id}/{user_id}")
-    public AppReadScoreResponse updateScore(@PathVariable Long map_id, @PathVariable Long user_id, @RequestBody AppUpdateScoreRequest score) {
+    public AppUpdateScoreResponse updateScore(@PathVariable Long map_id, @PathVariable Long user_id, @RequestBody AppUpdateScoreRequest score) {
         score.setMapId(map_id);
         score.setUserId(user_id);
         return scoreService.updateScore(score);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteScore(@PathVariable Long id) {
-        AppDeleteScoreRequest request = AppDeleteScoreRequest.builder().id(id).build();
+    @DeleteMapping("/delete/{map_id}/{user_id}")
+    public void deleteScore(@PathVariable Long map_id, @PathVariable Long user_id) {
+        AppScoreDeleteRequest request = AppScoreDeleteRequest.builder().mapId(map_id).userId(user_id).build();
         scoreService.deleteScore(request);
     }
         
