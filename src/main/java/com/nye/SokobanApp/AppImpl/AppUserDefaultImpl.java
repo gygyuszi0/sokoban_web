@@ -8,7 +8,13 @@ import com.nye.SokobanApp.AppDto.AppResponse.AppUserResponse.AppCreateUserRespon
 import com.nye.SokobanApp.AppDto.AppResponse.AppUserResponse.AppReadUserResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppUserResponse.AppUpdateUserResponse;
 import com.nye.SokobanApp.AppInterface.AppUserInterface;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
+@AllArgsConstructor
+//@NoArgsConstructor
 public class AppUserDefaultImpl implements AppUserInterface {
 
     @Override

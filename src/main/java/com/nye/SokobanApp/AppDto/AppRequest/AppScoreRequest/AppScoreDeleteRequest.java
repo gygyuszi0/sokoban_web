@@ -1,6 +1,5 @@
 package com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest;
 
-import com.nye.SokobanApp.AppDto.AppScoreId;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

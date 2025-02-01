@@ -8,7 +8,13 @@ import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppCreateScoreResp
 import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppReadScoreResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppUpdateScoreResponse;
 import com.nye.SokobanApp.AppInterface.AppScoreInterface;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
+@NoArgsConstructor
+//@AllArgsConstructor
 public class AppScoreDefaultImpl implements AppScoreInterface {
 
     @Override
