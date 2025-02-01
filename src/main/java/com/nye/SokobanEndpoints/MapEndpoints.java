@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nye.SokobanApp.AppDto.AppRequest.AppMapRequest.CreateMapRequest;
 import com.nye.SokobanApp.AppDto.AppRequest.AppMapRequest.UpdateMapRequest;
 import com.nye.SokobanApp.AppDto.AppResponse.AppMapResponse.CreateMapResponse;
-import com.nye.SokobanApp.AppDto.AppResponse.AppMapResponse.DeleteMapResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppMapResponse.ReadMapResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppMapResponse.UpdateMapResponse;
 
@@ -34,7 +33,6 @@ public class MapEndpoints {
         return new UpdateMapResponse();
     }
     @DeleteMapping("/delete/{id}")
-    DeleteMapResponse deleteMap(@PathVariable("id") Long id){
-        return new DeleteMapResponse();
+    void deleteMap(@PathVariable("id") Long id){
     }
 }
