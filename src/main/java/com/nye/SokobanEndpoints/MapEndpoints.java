@@ -43,7 +43,5 @@ public class MapEndpoints {
     }
     @DeleteMapping("/delete/{id}")
     void deleteMap(@PathVariable("id") Long id){
-        DeleteMapRequest request = DeleteMapRequest.builder().id(id).build();
-        mapService.deleteMap(request);
     }
 }
