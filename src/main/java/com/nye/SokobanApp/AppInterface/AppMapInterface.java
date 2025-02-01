@@ -1,5 +1,6 @@
 package com.nye.SokobanApp.AppInterface;
 
+import com.nye.SokobanApp.AppDto.AppRequest.AppMapRequest.UpdateMapRequest;
 import org.springframework.stereotype.Service;
 
 import com.nye.SokobanApp.AppDto.AppRequest.AppMapRequest.CreateMapRequest;
