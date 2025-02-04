@@ -48,14 +48,29 @@ public class AppMapDefaultImpl implements AppMapInterface {
 
     @Override
     public ReadMapResponse readMap(ReadMapRequest map) {
-        // TODO Auto-generated method stub
-        return new ReadMapResponse();
+        MapEntity entity = mapStorage.findById(map.getId()).orElseThrow();
+        ReadMapResponse response = ReadMapResponse.builder()
+                .mapContent(entity.getMapContent())
+                .startCoordinateX(entity.getStartCoordinateX())
+                .startCoordinateY(entity.getStartCoordinateY())
+                .build();
+        return response;
     }
 
     @Override
     public UpdateMapResponse updateMap(UpdateMapRequest map) {
-        // TODO Auto-generated method stub
-        return new UpdateMapResponse();
+        MapEntity entity = MapEntity.builder()
+                .id(map.getId())
+                .mapContent(map.getMapContent())
+                .startCoordinateX(map.getStartCoordinateX())
+                .startCoordinateY(map.getStartCoordinateY())
+                .build();
+        mapStorage.deleteById(map.getId());
+        entity = mapStorage.save(entity);
+        UpdateMapResponse response = UpdateMapResponse.builder()
+                .id(entity.getId())
+                .build();
+        return response;
     }
     
 }
