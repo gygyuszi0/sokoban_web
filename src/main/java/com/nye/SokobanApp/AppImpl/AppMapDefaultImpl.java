@@ -42,6 +42,8 @@ public class AppMapDefaultImpl implements AppMapInterface {
     @Override
     public void deleteMap(DeleteMapRequest map) {
         // TODO Auto-generated method stub
+        MapEntity entity = MapEntity.builder().id(map.getId()).build();
+        mapStorage.delete(entity);
     }
 
     @Override
