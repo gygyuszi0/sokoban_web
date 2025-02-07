@@ -1,7 +1,19 @@
 package com.nye.SokobanApp.AppDto.AppRequest.AppMapRequest;
 
+import com.nye.SokobanApp.AppDto.AppCoordinate;
 import com.nye.SokobanApp.AppDto.AppMap;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class UpdateMapRequest extends AppMap {
-
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UpdateMapRequest  {
+    private Long id;
+    private Integer startCoordinateX;
+    private Integer startCoordinateY;
+    private String mapContent;
 }

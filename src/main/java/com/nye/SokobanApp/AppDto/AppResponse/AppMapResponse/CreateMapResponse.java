@@ -1,7 +1,14 @@
 package com.nye.SokobanApp.AppDto.AppResponse.AppMapResponse;
 
-import com.nye.SokobanApp.AppDto.AppGetter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class CreateMapResponse extends AppGetter {
-
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreateMapResponse {
+    private Long id;
 }
