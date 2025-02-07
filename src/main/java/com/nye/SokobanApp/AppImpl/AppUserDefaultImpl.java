@@ -8,8 +8,10 @@ import com.nye.SokobanApp.AppDto.AppResponse.AppUserResponse.AppCreateUserRespon
 import com.nye.SokobanApp.AppDto.AppResponse.AppUserResponse.AppReadUserResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppUserResponse.AppUpdateUserResponse;
 import com.nye.SokobanApp.AppInterface.AppUserInterface;
+import com.nye.storage.entity.UserEntity;
+import com.nye.storage.service.UserStorage;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,28 +19,52 @@ import org.springframework.stereotype.Service;
 //@NoArgsConstructor
 public class AppUserDefaultImpl implements AppUserInterface {
 
+    @Autowired
+    private UserStorage userStorage;
+
     @Override
     public AppCreateUserResponse createUser(CreateUserRequest request) {
-        // TODO Auto-generated method stub
-        return new AppCreateUserResponse();
+        UserEntity entity = UserEntity.builder()
+                .userName(request.getUserName())
+                .realName(request.getRealName())
+                .password(request.getPassword())
+                .build();
+        UserEntity result = userStorage.save(entity);
+        AppCreateUserResponse response = AppCreateUserResponse.builder()
+                .id(result.getId()).build();
+        return response;
     }
 
     @Override
     public void deleteUser(DeleteUserRequest request) {
-        // TODO Auto-generated method stub
-        
+        UserEntity entity = UserEntity.builder()
+                .id(request.getId())
+                .build();
+        userStorage.delete(entity);
     }
 
     @Override
     public AppReadUserResponse readUser(ReadUserRequest request) {
-        // TODO Auto-generated method stub
-        return new AppReadUserResponse();
+        UserEntity result = userStorage.findById(request.getId()).orElseThrow();
+        AppReadUserResponse response = AppReadUserResponse.builder()
+                .userName(result.getUserName())
+                .realName(result.getRealName())
+                .build();
+        return response;
     }
 
     @Override
     public AppUpdateUserResponse updateUser(UpdateUserRequest request) {
-        // TODO Auto-generated method stub
-        return new AppUpdateUserResponse();
+        UserEntity entity = UserEntity.builder()
+                .id(request.getId())
+                .userName(request.getUserName())
+                .realName(request.getRealName())
+                .password(request.getPassword())
+                .build();
+        UserEntity result = userStorage.save(entity);
+        AppUpdateUserResponse response = AppUpdateUserResponse.builder()
+                .id(result.getId()).build();
+        return response;
     }
     
 }

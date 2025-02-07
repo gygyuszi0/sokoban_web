@@ -8,8 +8,13 @@ import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppCreateScoreResp
 import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppReadScoreResponse;
 import com.nye.SokobanApp.AppDto.AppResponse.AppScoreResponse.AppUpdateScoreResponse;
 import com.nye.SokobanApp.AppInterface.AppScoreInterface;
+import com.nye.storage.entity.ScoreEntity;
+import com.nye.storage.entity.ScoreId;
+import com.nye.storage.service.ScoreStorage;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.h2.mvstore.FreeSpaceBitSet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,28 +22,61 @@ import org.springframework.stereotype.Service;
 //@AllArgsConstructor
 public class AppScoreDefaultImpl implements AppScoreInterface {
 
+    @Autowired
+    private ScoreStorage scoreStorage;
+
     @Override
     public AppCreateScoreResponse createScore(AppCreateScoreRequest request) {
-        // TODO Auto-generated method stub
-        return new AppCreateScoreResponse();
+        ScoreEntity entity = ScoreEntity.builder()
+                .mapId(request.getMapId())
+                .userId(request.getUserId())
+                .score(request.getTime())
+                .build();
+        ScoreEntity result = scoreStorage.save(entity);
+        AppCreateScoreResponse response = AppCreateScoreResponse.builder()
+                .mapId(result.getMapId())
+                .userId(result.getUserId())
+                .build();
+        return  response;
     }
 
     @Override
     public void deleteScore(AppScoreDeleteRequest request) {
-        // TODO Auto-generated method stub
-        
+        ScoreEntity entity = ScoreEntity.builder()
+                .mapId(request.getMapId())
+                .userId(request.getUserId())
+                .build();
+        scoreStorage.delete(entity);
     }
 
     @Override
     public AppReadScoreResponse readScore(AppReadScoreRequest request) {
-        // TODO Auto-generated method stub
-        return new AppReadScoreResponse();
+        ScoreId entity = ScoreId.builder()
+                .mapId(request.getMapId())
+                .userId(request.getUserId())
+                .build();
+        ScoreEntity result = scoreStorage.findById(entity).orElseThrow();
+        AppReadScoreResponse response = AppReadScoreResponse.builder()
+                .mapId(result.getMapId())
+                .userId(result.getUserId())
+                .time(result.getScore())
+                .build();
+        return  response;
     }
 
     @Override
     public AppUpdateScoreResponse updateScore(AppUpdateScoreRequest request) {
-        // TODO Auto-generated method stub
-        return new AppUpdateScoreResponse();
+        ScoreEntity entity = ScoreEntity.builder()
+                .mapId(request.getMapId())
+                .userId(request.getUserId())
+                .score(request.getScore())
+                .build();
+        ScoreEntity result = scoreStorage.save(entity);
+        AppUpdateScoreResponse response = AppUpdateScoreResponse.builder()
+                .mapId(result.getMapId())
+                .userId(result.getUserId())
+                .build();
+        return  response;
     }
     
 }
