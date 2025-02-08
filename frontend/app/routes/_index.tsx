@@ -1,4 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
+import Nav from "./navigation";
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,8 +10,16 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="flex h-screen items-center justify-center">
-      <div className="flex flex-col items-center gap-16">
+    <>
+      <Nav />
+      <div className="flex flex-col h-screen items-center justify-center">
+        <div className="text-3xl font-bold">Welcome Sokoban Web!</div>
+        
+        <div className="text-lg">
+          Szakdolgozati munka<br/>
+          Györgyi Gyula - PTI
+        </div>
+        {/* <div className="flex flex-col items-center gap-16">
         <header className="flex flex-col items-center gap-9">
           <h1 className="leading text-2xl font-bold text-gray-800 dark:text-gray-100">
             Welcome to <span className="sr-only">Remix</span>
@@ -48,8 +57,9 @@ export default function Index() {
             ))}
           </ul>
         </nav>
+      </div> */}
       </div>
-    </div>
+    </>
   );
 }
 
