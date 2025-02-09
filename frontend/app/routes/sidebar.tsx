@@ -1,3 +1,7 @@
+import { 
+    Link,
+    Links
+} from "@remix-run/react";
 import { Component } from "react";
 
 export function LoggedOutSideBar() {
@@ -8,7 +12,10 @@ export function LoggedOutSideBar() {
                     <h2>Logged Out</h2>
                 </div>
                 <div className="logged-out-side-bar-content">
-                    <button className="button-style">Log in</button>
+                    <Link to="./login" className="button-style">Log in</Link>
+                </div>
+                <div className="logged-out-side-bar-content">
+                    <Link to="./register" className="button-style">Register</Link>
                 </div>
             </div>
         </>
