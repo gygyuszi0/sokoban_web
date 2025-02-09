@@ -10,3 +10,19 @@ body {
 nav {
   @apply grid grid-cols-2 gap-4 p-4 bg-gray-400;
 }
+
+.logged-out-side-bar {
+  @apply flex flex-col bg-gray-300 h-full; 
+}
+
+.logged-out-side-bar-heading{
+  @apply font-bold text-gray-600 p-4 w-full border-4 border-gray-300 border-b-green-600;
+}
+
+.logged-out-side-bar-content {
+  @apply flex flex-row p-4;
+}
+
+.button-style{
+  @apply bg-green-600 text-white hover:bg-green-700 rounded p-4 w-full
+}

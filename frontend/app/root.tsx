@@ -6,6 +6,8 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
+import Nav from "./routes/navigation";
+import SideBar from "./routes/sidebar";
 
 import "./tailwind.css";
 
@@ -32,9 +34,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+        <>
+          <Nav />
+          <div className="flex flex-row h-screen">
+            <div className="grow">
+              <Outlet />
+            </div>
+            <div className="w-64 h-full">
+              <SideBar />
+            </div>
+          </div>
+        </>
       </body>
     </html>
   );
