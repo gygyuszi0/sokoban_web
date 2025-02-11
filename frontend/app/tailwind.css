@@ -27,14 +27,17 @@ nav {
   @apply bg-green-600 text-white rounded p-4 w-full text-center hover:bg-green-700
 }
 
-.login-page {
+.login-page ,
+.register-page {
   @apply flex justify-center items-center p-4 w-full h-full;
 }
 
-.login-window {
+.login-window,
+.register-window {
   @apply bg-gray-400 p-4 w-2/5 h-2/5 rounded shadow-md;
 }
 
-.login_from {
+.login_from ,
+.register_from {
   @apply flex flex-col p-4 gap-4;
 }
