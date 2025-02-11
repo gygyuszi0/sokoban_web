@@ -34,10 +34,14 @@ nav {
 
 .login-window,
 .register-window {
-  @apply bg-gray-400 p-4 w-2/5 h-2/5 rounded shadow-md;
+  @apply bg-gray-400 p-4 w-2/5 h-3/5 rounded shadow-md;
 }
 
 .login_form ,
 .register_form {
   @apply flex flex-col p-4 gap-4;
+}
+
+.text-field-style{
+  @apply p-2 w-full rounded border-2 border-gray-300;
 }
