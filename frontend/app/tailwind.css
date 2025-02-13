@@ -45,3 +45,25 @@ nav {
 .text-field-style{
   @apply p-2 w-full rounded border-2 border-gray-300;
 }
+
+.dashboard-content{
+  @apply grid grid-cols-2 p-4 gap-4 justify-items-center ;
+}
+
+.dashboard-item {
+  @apply flex flex-col 
+    p-4 gap-4 
+    w-64 h-64 
+    rounded
+    shadow-md
+    bg-orange-300;
+}
+
+.dashboard-item-title {
+  @apply text-lg font-bold text-gray-600
+    h-1/6;
+}
+
+.dashboard-item-img {
+  @apply h-5/6;
+}

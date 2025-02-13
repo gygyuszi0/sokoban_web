@@ -7,7 +7,8 @@ function EmptyNav() {
     return (
         <>
             <nav className="nav">
-                <div className="nav-item font-bold">Sokoban Web</div>
+                <Link className="nav-item font-bold" to="/">Sokoban Web</Link>
+                <Link to="./game_dashboard">Dashboard</Link>
             </nav>
         </>
     );
