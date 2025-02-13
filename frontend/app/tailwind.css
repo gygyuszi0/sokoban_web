@@ -67,3 +67,9 @@ nav {
 .dashboard-item-img {
   @apply h-5/6;
 }
+
+.dashboard-title {
+  @apply font-bold text-gray-600 
+    w-full p-2
+    bg-gray-300;
+}

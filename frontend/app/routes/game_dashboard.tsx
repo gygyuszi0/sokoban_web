@@ -10,7 +10,7 @@ export const links: LinksFunction = () => (
 export default function GameDashboard() {
   return (
     <>
-      <h1>Dashboard</h1>
+      <h1 className="dashboard-title">Dashboard</h1>
       <div className="dashboard-content">
         <div className="dashboard-item">
           <div className="dashboard-item-img">img</div>
