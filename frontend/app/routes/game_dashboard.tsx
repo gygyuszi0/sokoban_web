@@ -1,5 +1,5 @@
-import type { LinksFunction } from "@remix-run/node";
-import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
+import type { LinksFunction, redirect } from "@remix-run/node";
+import { isRouteErrorResponse, Link, useRouteError } from "@remix-run/react";
 
 export const links: LinksFunction = () => (
   [
@@ -16,10 +16,10 @@ export default function GameDashboard() {
           <div className="dashboard-item-img">img</div>
           <h2 className="dashboard-item-title">Play</h2>
         </div>
-        <div className="dashboard-item">
+        <a className="dashboard-item"href="./create_map_dimensions">   
           <div className="dashboard-item-img">img</div>
           <h2 className="dashboard-item-title">Craete new map</h2>
-        </div>
+        </a>
         <div className="dashboard-item">
           <div className="dashboard-item-img">img</div>
           <h2 className="dashboard-item-title">Score</h2>
