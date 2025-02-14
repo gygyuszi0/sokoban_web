@@ -4,22 +4,16 @@ import type { ClientActionFunctionArgs } from "@remix-run/react";
 import { Form, useForm } from "react-hook-form";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-    return redirect("/create_map");
+    return redirect("/login");
 };
 
 export default function RouteComponent() {
     return (
         <>
-            <div className="login-page">
-                <div className="login-window">
-                    <h3>Log in</h3>
-                    <form method="post">
-                        <input className="text-field-style" type="text" name="width"></input>
-                        <input className="text-field-style" type="text" name="height"></input>
-                        <button className="button-style" type="submit">OK</button>
-                    </form>
-                </div>
-            </div>
+            <h1>Create map</h1>
+            <form method="post">
+                <button type="submit">OK</button>
+            </form>
         </>
     );
 }
