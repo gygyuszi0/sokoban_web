@@ -10,10 +10,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 export default function RouteComponent() {
     return (
         <>
-            <div className="login-page">
-                <div className="login-window">
-                    <h3>Log in</h3>
-                    <form method="post">
+            <div className="dimensions-page">
+                <div className="dimensions-window">
+                    <h3>Dimensions</h3>
+                    <form className="dimensions_form" method="post">
                         <input className="text-field-style" type="text" name="width"></input>
                         <input className="text-field-style" type="text" name="height"></input>
                         <button className="button-style" type="submit">OK</button>

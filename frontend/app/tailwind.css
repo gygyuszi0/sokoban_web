@@ -40,7 +40,8 @@ nav {
 }
 
 .login_form ,
-.register_form {
+.register_form,
+.dimensions_form{
   @apply flex flex-col p-4 gap-4;
 }
 
