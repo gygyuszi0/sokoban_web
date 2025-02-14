@@ -71,8 +71,53 @@ nav {
   @apply h-5/6;
 }
 
-.dashboard-title {
+.sub-title {
   @apply font-bold text-gray-600 
     w-full p-2
     bg-gray-300;
+}
+
+.create-map-content {
+  @apply flex flex-col p-4 gap-4 
+    w-full h-full;
+}
+
+.map-grid{
+  @apply flex flex-col 
+    gap-4 p-4
+    w-full h-auto
+    bg-gray-100;
+}
+
+.map-grid-line,
+.map-items-line {
+  @apply flex flex-row gap-4;
+}
+.map-grid-item{
+  @apply flex flex-col p-4 w-8 h-8 bg-emerald-900;
+}
+
+.map-items {
+  @apply flex flex-col 
+    p-4 gap-4 
+    w-full h-auto
+    bg-gray-100;
+}
+
+
+.map-buttons {
+  @apply flex flex-row
+    justify-end 
+    gap-4 p-4
+    w-full h-auto
+    bg-gray-100;
+}
+
+.map-button {
+  @apply flex flex-col
+    w-auto h-auto
+    p-2 
+    rounded
+    shadow-md
+    bg-zinc-500;
 }
