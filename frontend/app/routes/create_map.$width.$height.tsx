@@ -53,7 +53,7 @@ export default function RouteComponent() {
     const height = parseInt(params.height);
 
     const [selected, setSelected] = useState("s");
-    const navigate = useNavigate();
+
     return (
         <>
             <h1 className="sub-title">Create map</h1>
@@ -66,9 +66,10 @@ export default function RouteComponent() {
                 <div className="map-items">
                     <div className="map-items-line">
                         <button className="map-grid-item" onClick={() => (setSelected("w"))}>w</button>
-                        <button className="map-grid-item">s</button>
-                        <button className="map-grid-item">p</button>
-                        <button className="map-grid-item">b</button>
+                        <button className="map-grid-item" onClick={() => (setSelected("s"))}>s</button>
+                        <button className="map-grid-item" onClick={() => (setSelected("p"))}>p</button>
+                        <button className="map-grid-item" onClick={() => (setSelected("b"))}>b</button>
+                        <button className="map-grid-item" onClick={() => (setSelected("t"))}>t</button>
                     </div>
                 </div>
                 <form className="map-buttons" method="post">
