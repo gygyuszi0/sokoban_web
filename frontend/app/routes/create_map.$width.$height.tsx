@@ -23,14 +23,43 @@ function MapRow({ children }: { children: React.ReactNode }) {
     );
 }
 
-function MapItem(index : any) {
+function MapItem(index: any) {
     return (
-        <input className="map-grid-item" type="text" name="item_${index}" value="s"/>
+        <input className="map-grid-item" type="text" name="item_${index}" value="${index}" />
+    );
+}
+
+const MapGrid = (props) => {
+
+    let rows = [];
+    for (let i = 0; i < props.height; i++) {
+        let row = [];
+        for (let j = 0; j < props.width; j++) {
+            row.push(<MapItem index={i * props.width + j} />);
+        }
+        rows.push(<MapRow>{row}</MapRow>);
+    }
+    const h = [...Array(props.width).keys()];
+
+    return (
+        <>
+            <p>h :{[Array(props.width).keys()]}</p>
+            {h.map(
+                (item) => (
+                    <p>{item}</p>
+                )
+            )
+            }
+
+        </>
     );
 }
 
 export default function RouteComponent() {
     const params = useParams();
+    const width = parseInt(params.width);
+    const height = parseInt(params.height);
+
     return (
         <>
             <h1 className="sub-title">Create map</h1>
@@ -38,19 +67,7 @@ export default function RouteComponent() {
             <p>Height : {params.height}</p>
             <div className="create-map-content">
                 <div className="map-grid">
-                    <MapRow><MapItem index={0}/></MapRow>
-                    {/* <div className="map-grid-line">
-                        <button className="map-grid-item"></button>
-                        <button className="map-grid-item"></button>
-                        <button className="map-grid-item"></button>
-                        <button className="map-grid-item"></button>
-                    </div> */}
-                    <div className="map-grid-line">
-                        <button className="map-grid-item"></button>
-                        <button className="map-grid-item"></button>
-                        <button className="map-grid-item"></button>
-                        <button className="map-grid-item"></button>
-                    </div>
+                    <MapGrid width={width} height={height} />
                 </div>
 
                 <div className="map-items">
