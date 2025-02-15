@@ -23,9 +23,11 @@ function MapRow({ children }: { children: React.ReactNode }) {
     );
 }
 
-function MapItem(index: any) {
+function MapItem(props) {
+    const name = "item_" + props.index;
+    const index = props.index;
     return (
-        <input className="map-grid-item" type="text" name="item_${index}" value="${index}" />
+        <input className="map-grid-item" type="text" disabled={true} name={name} value="s" />
     );
 }
 
@@ -39,19 +41,9 @@ const MapGrid = (props) => {
         }
         rows.push(<MapRow>{row}</MapRow>);
     }
-    const h = [...Array(props.width).keys()];
 
     return (
-        <>
-            <p>h :{[Array(props.width).keys()]}</p>
-            {h.map(
-                (item) => (
-                    <p>{item}</p>
-                )
-            )
-            }
-
-        </>
+        <>{rows}</>
     );
 }
 
