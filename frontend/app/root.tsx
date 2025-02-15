@@ -34,7 +34,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <>
+          <Scripts></Scripts>
           <Nav />
           <div className="flex flex-row h-screen">
             <div className="grow">
@@ -44,7 +44,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <SideBar />
             </div>
           </div>
-        </>
       </body>
     </html>
   );

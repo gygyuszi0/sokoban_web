@@ -1,8 +1,8 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import type { ActionFunctionArgs } from "@remix-run/node";
-import { isRouteErrorResponse, redirect, useParams, useRouteError } from "@remix-run/react";
+import { isRouteErrorResponse, redirect, useNavigate, useParams, useRouteError } from "@remix-run/react";
 import type { ClientActionFunctionArgs } from "@remix-run/react";
-import React from "react";
+import React, { useState } from "react";
 import { Form, useForm } from "react-hook-form";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -52,9 +52,12 @@ export default function RouteComponent() {
     const width = parseInt(params.width);
     const height = parseInt(params.height);
 
+    const [selected, setSelected] = useState("s");
+    const navigate = useNavigate();
     return (
         <>
             <h1 className="sub-title">Create map</h1>
+            <p>Slected : {selected}</p>
             <div className="create-map-content">
                 <div className="map-grid">
                     <MapGrid width={width} height={height} />
@@ -62,7 +65,7 @@ export default function RouteComponent() {
 
                 <div className="map-items">
                     <div className="map-items-line">
-                        <button className="map-grid-item">w</button>
+                        <button className="map-grid-item" onClick={() => (setSelected("w"))}>w</button>
                         <button className="map-grid-item">s</button>
                         <button className="map-grid-item">p</button>
                         <button className="map-grid-item">b</button>
