@@ -2,6 +2,7 @@ import type { LoaderFunctionArgs } from "@remix-run/node";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { isRouteErrorResponse, redirect, useParams, useRouteError } from "@remix-run/react";
 import type { ClientActionFunctionArgs } from "@remix-run/react";
+import React from "react";
 import { Form, useForm } from "react-hook-form";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -10,10 +11,23 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-    
+
     return null;
 };
 
+function MapRow({ children }: { children: React.ReactNode }) {
+    return (
+        <div className="map-grid-line">
+            {children}
+        </div>
+    );
+}
+
+function MapItem(index : any) {
+    return (
+        <input className="map-grid-item" type="text" name="item_${index}" value="s"/>
+    );
+}
 
 export default function RouteComponent() {
     const params = useParams();
@@ -24,12 +38,13 @@ export default function RouteComponent() {
             <p>Height : {params.height}</p>
             <div className="create-map-content">
                 <div className="map-grid">
-                    <div className="map-grid-line">
+                    <MapRow><MapItem index={0}/></MapRow>
+                    {/* <div className="map-grid-line">
                         <button className="map-grid-item"></button>
                         <button className="map-grid-item"></button>
                         <button className="map-grid-item"></button>
                         <button className="map-grid-item"></button>
-                    </div>
+                    </div> */}
                     <div className="map-grid-line">
                         <button className="map-grid-item"></button>
                         <button className="map-grid-item"></button>
