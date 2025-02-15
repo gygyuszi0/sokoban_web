@@ -1,12 +1,12 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import type { ActionFunctionArgs } from "@remix-run/node";
-import { isRouteErrorResponse, redirect, useNavigate, useParams, useRouteError } from "@remix-run/react";
+import { isRouteErrorResponse, Link, redirect, useNavigate, useParams, useRouteError } from "@remix-run/react";
 import type { ClientActionFunctionArgs } from "@remix-run/react";
 import React, { useState } from "react";
 import { Form, useForm } from "react-hook-form";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-    return redirect("/login");
+    return redirect("/game_dashboard");
 };
 
 
@@ -23,12 +23,8 @@ function MapRow({ children }: { children: React.ReactNode }) {
     );
 }
 
-
-function StateItem(props) {
-    const label = props.label;
-    return (
-        <button type="button">{label}</button>
-    );
+export async function cancel() {
+    return redirect("./game_dashboard");
 }
 
 export default function RouteComponent() {
@@ -37,7 +33,6 @@ export default function RouteComponent() {
     const height = parseInt(params.height);
 
     const [selected, setSelected] = useState("s");
-    // const [buttonLabels, setButtonLabels] = useState([...Array(10).keys()].map(i => "s"));
     const [buttonLabels, setButtonLabels] = useState([...Array(width * height).keys()].map(i => "s"));
 
     function MapItem(props) {
@@ -48,7 +43,7 @@ export default function RouteComponent() {
             <button className="map-grid-item" name={name}
                 onClick={() => {
                     let labels = [...buttonLabels];
-                    labels[index]=selected;
+                    labels[index] = selected;
                     setButtonLabels(labels);
                 }}>{label}</button>
         );
@@ -73,6 +68,7 @@ export default function RouteComponent() {
         );
     }
 
+    const navigation = useNavigate();
     return (
         <>
             <h1 className="sub-title">Create map</h1>
@@ -91,10 +87,13 @@ export default function RouteComponent() {
                         <button className="map-grid-item" onClick={() => (setSelected("t"))}>t</button>
                     </div>
                 </div>
-                <form className="map-buttons" method="post">
-                    <button className="map-button" type="button">Cancel</button>
-                    <button className="map-button" type="submit">OK</button>
-                </form>
+                <div className="map-buttons">
+                    <button className="map-button" onClick={() => navigation(-1)}>Cancel</button>
+                    <form method="post">
+                        <input type="hidden" name="map" value={JSON.stringify(buttonLabels)} />
+                        <button className="map-button" type="submit">OK</button>
+                    </form>
+                </div>
             </div>
         </>
     );
