@@ -79,13 +79,16 @@ nav {
 
 .create-map-content {
   @apply flex flex-col p-4 gap-4 
-    w-full h-full;
+    w-full max-w-4xl
+    h-full max-h-svh;
 }
 
 .map-grid{
   @apply flex flex-col 
     gap-2 p-4
-    w-full h-auto
+    w-full max-w-4xl
+    h-full max-h-svh
+    overflow-auto
     bg-gray-100;
 }
 

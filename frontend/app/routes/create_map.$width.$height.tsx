@@ -55,8 +55,6 @@ export default function RouteComponent() {
     return (
         <>
             <h1 className="sub-title">Create map</h1>
-            <p>Width : {params.width}</p>
-            <p>Height : {params.height}</p>
             <div className="create-map-content">
                 <div className="map-grid">
                     <MapGrid width={width} height={height} />
@@ -64,10 +62,10 @@ export default function RouteComponent() {
 
                 <div className="map-items">
                     <div className="map-items-line">
-                        <button className="map-grid-item"></button>
-                        <button className="map-grid-item"></button>
-                        <button className="map-grid-item"></button>
-                        <button className="map-grid-item"></button>
+                        <button className="map-grid-item">w</button>
+                        <button className="map-grid-item">s</button>
+                        <button className="map-grid-item">p</button>
+                        <button className="map-grid-item">b</button>
                     </div>
                 </div>
                 <form className="map-buttons" method="post">
