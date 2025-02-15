@@ -37,6 +37,7 @@ export default function RouteComponent() {
     const height = parseInt(params.height);
 
     const [selected, setSelected] = useState("s");
+    // const [buttonLabels, setButtonLabels] = useState([...Array(10).keys()].map(i => "s"));
     const [buttonLabels, setButtonLabels] = useState([...Array(width * height).keys()].map(i => "s"));
 
     function MapItem(props) {
@@ -44,7 +45,12 @@ export default function RouteComponent() {
         const index = props.index;
         const label = buttonLabels[index];
         return (
-            <button className="map-grid-item" name={name}>{label}</button>
+            <button className="map-grid-item" name={name}
+                onClick={() => {
+                    let labels = [...buttonLabels];
+                    labels[index]=selected;
+                    setButtonLabels(labels);
+                }}>{label}</button>
         );
     }
 
@@ -58,7 +64,7 @@ export default function RouteComponent() {
             }
             rows.push(<MapRow>{row}</MapRow>);
         }
-    
+
         const labels = [...props.labels];
         return (
             <>
@@ -66,7 +72,7 @@ export default function RouteComponent() {
             </>
         );
     }
-    
+
     return (
         <>
             <h1 className="sub-title">Create map</h1>
@@ -83,12 +89,6 @@ export default function RouteComponent() {
                         <button className="map-grid-item" onClick={() => (setSelected("p"))}>p</button>
                         <button className="map-grid-item" onClick={() => (setSelected("b"))}>b</button>
                         <button className="map-grid-item" onClick={() => (setSelected("t"))}>t</button>
-                        <button className="map-grid-item" onClick={() => {
-                                let new_array =[...Array(5).keys()].map(i => "s");
-                                new_array[3] = "w";
-                                setButtonLabels(new_array);
-                            }}>{buttonLabels[3]}</button>
-                        
                     </div>
                 </div>
                 <form className="map-buttons" method="post">
