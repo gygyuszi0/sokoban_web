@@ -4,7 +4,10 @@ import type { ClientActionFunctionArgs } from "@remix-run/react";
 import { Form, useForm } from "react-hook-form";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-    return redirect("/create_map");
+    const formData = await request.formData();
+    const width = formData.get("width");
+    const height = formData.get("height");
+    return redirect(`/create_map/${width}/${height}`);
 };
 
 export default function RouteComponent() {
