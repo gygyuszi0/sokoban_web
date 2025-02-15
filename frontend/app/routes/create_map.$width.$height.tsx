@@ -6,6 +6,17 @@ import React, { useState } from "react";
 import { Form, useForm } from "react-hook-form";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
+    fetch('/map/create', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstParam: 'yourValue',
+          secondParam: 'yourOtherValue',
+        })
+      })
     return redirect("/game_dashboard");
 };
 
