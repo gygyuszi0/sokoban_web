@@ -4,8 +4,19 @@ import { isRouteErrorResponse, Link, redirect, useNavigate, useParams, useRouteE
 import type { ClientActionFunctionArgs } from "@remix-run/react";
 import React, { useState } from "react";
 import { Form, useForm } from "react-hook-form";
+import { postRequest } from "~/routes/service/data";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
+    const data = await request.formData();
+
+    const map_content = data.get("map")?.toString();
+    const width = parseInt(data.get("width"));
+    const height = parseInt(data.get("height"));
+    const player_index = map_content.indexOf("p");
+
+    const player_x = Math.floor(player_index/height);
+    const player_y = player_index % width;
+
     fetch('http://localhost:8888/map/create', {
         method: 'POST',
         headers: {
@@ -14,12 +25,20 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         },
         body: JSON.stringify({
             startCoordinate: {
-                x : 0,
-                y : 0
+                x : player_x,
+                y : player_y
             },
-            mapContent: "asdasdasdasd",
+            mapContent: map_content?.toString(),
         })
       })
+    // postRequest("map/create", JSON.stringify({
+    //     startCoordinate: {
+    //         x: 0,
+    //         y: 0
+    //     },
+    //     mapContent: "asdasdasdasd"
+    // }))
+
     return redirect("/game_dashboard");
 };
 
@@ -104,6 +123,8 @@ export default function RouteComponent() {
                 <div className="map-buttons">
                     <button className="map-button" onClick={() => navigation(-1)}>Cancel</button>
                     <form method="post">
+                        <input type="hidden" name="width" value={width} />
+                        <input type="hidden" name="height" value={height} />
                         <input type="hidden" name="map" value={JSON.stringify(buttonLabels)} />
                         <button className="map-button" type="submit">OK</button>
                     </form>
