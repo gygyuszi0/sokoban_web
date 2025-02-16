@@ -9,13 +9,20 @@ import { postRequest } from "~/routes/service/data";
 export const action = async ({ request }: ActionFunctionArgs) => {
     const data = await request.formData();
 
-    const map_content = data.get("map")?.toString();
+    const map_content = data.get("map");
+    const map_array = JSON.parse(map_content);
+
     const width = parseInt(data.get("width"));
     const height = parseInt(data.get("height"));
-    const player_index = map_content.indexOf("p");
+    const player_index = map_array.indexOf("p");
 
     const player_x = Math.floor(player_index/height);
     const player_y = player_index % width;
+
+    let map = String();
+    for (let index = 0; index < map_array.length; index++) {
+        map = map.concat(map_array[index]);
+    }
 
     fetch('http://localhost:8888/map/create', {
         method: 'POST',
@@ -28,7 +35,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
                 x : player_x,
                 y : player_y
             },
-            mapContent: map_content?.toString(),
+            mapContent: map
         })
       })
     // postRequest("map/create", JSON.stringify({
