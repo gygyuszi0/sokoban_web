@@ -29,7 +29,8 @@ nav {
 
 .login-page ,
 .register-page,
-.dimensions-page {
+.dimensions-page,
+ {
   @apply flex justify-center items-center p-4 w-full h-full;
 }
 
@@ -41,8 +42,32 @@ nav {
 
 .login_form ,
 .register_form,
-.dimensions_form{
+.dimensions_form
+{
   @apply flex flex-col p-4 gap-4;
+}
+
+.score-page{
+  @apply flex flex-col p-4 gap-4;
+}
+
+.score-list{
+  @apply flex flex-col gap-4
+    rounded-md
+    p-4
+    bg-gray-300;
+}
+
+.score-header {
+  @apply flex flex-row gap-2 p-2
+    divide-x
+    rounded-t-md
+    text-white
+    bg-green-600
+}
+
+.header-item {
+  @apply text-lg italic p-2;
 }
 
 .text-field-style{

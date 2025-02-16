@@ -38,13 +38,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
             mapContent: map
         })
       })
-    // postRequest("map/create", JSON.stringify({
-    //     startCoordinate: {
-    //         x: 0,
-    //         y: 0
-    //     },
-    //     mapContent: "asdasdasdasd"
-    // }))
 
     return redirect("/game_dashboard");
 };

@@ -16,14 +16,14 @@ export default function GameDashboard() {
           <div className="dashboard-item-img">img</div>
           <h2 className="dashboard-item-title">Play</h2>
         </div>
-        <a className="dashboard-item"href="./create_map_dimensions">   
+        <a className="dashboard-item" href="./create_map_dimensions">   
           <div className="dashboard-item-img">img</div>
           <h2 className="dashboard-item-title">Craete new map</h2>
         </a>
-        <div className="dashboard-item">
+        <a className="dashboard-item "href="./score">   
           <div className="dashboard-item-img">img</div>
           <h2 className="dashboard-item-title">Score</h2>
-        </div>
+        </a>
       </div>
 
     </>
