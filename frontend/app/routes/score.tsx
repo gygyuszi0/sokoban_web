@@ -5,16 +5,18 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   return null;
 };
 
-export default function RouteComponent(){
+export default function RouteComponent() {
   const data = useLoaderData<typeof loader>()
 
-  function ScoreItem(mapId : number, userId : number, score:number){
+  function ScoreItem(props) {
     return (
-      <div className="score-item">
-        <div></div>
-      </div>
+        <div className="score-item">
+            <div className="score-item-field">{props.mapId}</div>
+            <div className="score-item-field">{props.userId}</div>
+            <div className="score-item-field">{props.score}</div>
+        </div>
     );
-  }
+  };
   return (
     <>
       <h1 className="sub-title">Scores</h1>
@@ -25,16 +27,43 @@ export default function RouteComponent(){
             <div className="header-item">User id</div>
             <div className="header-item">Score</div>
           </div>
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
+          <ScoreItem mapId={1} userId={1} score={100} />
         </div>
       </div>
     </>
   );
 }
 
-export function ErrorBoundary(){
+export function ErrorBoundary() {
   const error = useRouteError();
   if (isRouteErrorResponse(error)) {
-    return <div/>
+    return <div />
   }
-  return <div/>
+  return <div />
 }

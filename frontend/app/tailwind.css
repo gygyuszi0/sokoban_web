@@ -29,8 +29,7 @@ nav {
 
 .login-page ,
 .register-page,
-.dimensions-page,
- {
+.dimensions-page {
   @apply flex justify-center items-center p-4 w-full h-full;
 }
 
@@ -55,6 +54,8 @@ nav {
   @apply flex flex-col gap-4
     rounded-md
     p-4
+    max-h-svh
+    overflow-auto
     bg-gray-300;
 }
 
@@ -67,7 +68,19 @@ nav {
 }
 
 .header-item {
-  @apply text-lg italic p-2;
+  @apply text-lg italic 
+    min-w-24
+    p-2;
+}
+
+.score-item {
+  @apply flex flex-row gap-2 p-2;
+}
+
+.score-item-field {
+  @apply text-lg p-2
+    min-w-24
+    bg-gray-200;
 }
 
 .text-field-style{
