@@ -13,11 +13,12 @@ export default function RouteComponent() {
     const data = useLoaderData<typeof loader>()
 
     function MapItem(props) {
+        const target = "./play/" + props.mapId;
         return (
-            <Link className="map-item" to="play.$mapId">
+            <a className="map-item" href={target}>
                 <div className="map-item-field">{props.mapId}</div>
                 <div className="map-item-field">{props.mapName}</div>
-            </Link>);
+            </a>);
     };
 
     return (

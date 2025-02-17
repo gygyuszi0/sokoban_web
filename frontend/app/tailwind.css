@@ -76,11 +76,13 @@ nav {
     p-2;
 }
 
-.score-item {
+.score-item,
+.map-item {
   @apply flex flex-row gap-2 p-2;
 }
 
-.score-item-field {
+.score-item-field,
+.map-item-field {
   @apply text-lg p-2
     min-w-24
     bg-gray-200;
