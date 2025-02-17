@@ -12,10 +12,10 @@ export default function GameDashboard() {
     <>
       <h1 className="sub-title">Dashboard</h1>
       <div className="dashboard-content">
-        <div className="dashboard-item">
+        <a href="play_map_selector" className="dashboard-item">
           <div className="dashboard-item-img">img</div>
           <h2 className="dashboard-item-title">Play</h2>
-        </div>
+        </a>
         <a className="dashboard-item" href="./create_map_dimensions">   
           <div className="dashboard-item-img">img</div>
           <h2 className="dashboard-item-title">Craete new map</h2>

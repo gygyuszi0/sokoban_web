@@ -46,11 +46,13 @@ nav {
   @apply flex flex-col p-4 gap-4;
 }
 
-.score-page{
+.score-page,
+.map-page { 
   @apply flex flex-col p-4 gap-4;
 }
 
-.score-list{
+.score-list,
+.map-list {
   @apply flex flex-col gap-4
     rounded-md
     p-4
@@ -59,7 +61,8 @@ nav {
     bg-gray-300;
 }
 
-.score-header {
+.score-header,
+.map-header {
   @apply flex flex-row gap-2 p-2
     divide-x
     rounded-t-md
