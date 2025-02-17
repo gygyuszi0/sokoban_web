@@ -37,7 +37,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
             },
             mapContent: map
         })
-      })
+      }).catch(error => {
+        console.log(error);
+      });
 
     return redirect("/game_dashboard");
 };
