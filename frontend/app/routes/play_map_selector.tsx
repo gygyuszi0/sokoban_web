@@ -2,7 +2,16 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { useLoaderData, isRouteErrorResponse, useRouteError, Link } from "@remix-run/react";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-    return null;
+    const mapList = [];
+    for (let index = 0; index < 10; index++) {
+
+        mapList.push({
+            mapId: index,
+            mapName: ("teszt" + index)
+        });
+
+    }
+    return mapList;
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -30,7 +39,10 @@ export default function RouteComponent() {
                         <div className="header-item">Id</div>
                         <div className="header-item">Name</div>
                     </div>
-                    <MapItem mapId={1} mapName={"teszt"}></MapItem>
+                    {data.map((item) => (
+                        <MapItem mapId={item?.mapId} mapName={item?.mapName} />
+                    ))}
+
                 </div>
             </div>
         </>
