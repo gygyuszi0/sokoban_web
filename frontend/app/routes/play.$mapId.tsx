@@ -20,6 +20,19 @@ function toIndex(coord: coordinate, width: number, height: number) {
     return coord.y * height + coord.x;
 }
 
+function isWall(coord: coordinate, content: string, width: number, height: number) {
+    const index = toIndex(coord, width, height);
+    const field = content[index];
+    return field == "w";
+}
+
+function isBox(coord: coordinate, content: string, width: number, height: number) {
+    const index = toIndex(coord, width, height);
+    const field = content[index];
+    return field == "b";
+}
+
+
 function findCoordinates(content: string, pattern: string, width: number, height: number) {
     const coordinates = [];
     for (let index = 0; index < content.length && index != -1; index++) {
@@ -37,7 +50,7 @@ function findCoordinates(content: string, pattern: string, width: number, height
 }
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const Name = "teszt";
-    const Content = "ssswtpbss";
+    const Content = "ssstwpbss";
     const width = 3;
     const height = 3;
 
@@ -112,58 +125,65 @@ export default function RouteComponent() {
     function moveUp() {
         if (playerCoord.y != 0) {
             const upper = { x: playerCoord.x, y: playerCoord.y - 1, hide: playerCoord.hide };
-            const index = toIndex(upper, data.width, data.height);
-            const index_player = toIndex(playerCoord, data.width, data.height);
-            const new_hide = buttonLabels[index];
-            const new_player = { x: playerCoord.x, y: playerCoord.y - 1, hide: new_hide };
-            let labels = [...buttonLabels];
-            labels[index] = "p";
-            labels[index_player] = playerCoord.hide;
-            setButtonLabels(labels);
-            setPlayerCoord(new_player);
+            if (!isWall(upper, content, data.width, data.height)) {
+                const index = toIndex(upper, data.width, data.height);
+                const index_player = toIndex(playerCoord, data.width, data.height);
+                const new_hide = buttonLabels[index];
+                const new_player = { x: playerCoord.x, y: playerCoord.y - 1, hide: new_hide };
+                let labels = [...buttonLabels];
+                labels[index] = "p";
+                labels[index_player] = playerCoord.hide;
+                setButtonLabels(labels);
+                setPlayerCoord(new_player);
+            }
         }
     }
-
     function moveDown() {
         if (playerCoord.y != data.height - 1) {
             const upper = { x: playerCoord.x, y: playerCoord.y + 1, hide: playerCoord.hide };
-            const index = toIndex(upper, data.width, data.height);
-            const index_player = toIndex(playerCoord, data.width, data.height);
-            const new_hide = buttonLabels[index];
-            const new_player = { x: playerCoord.x, y: playerCoord.y + 1, hide: new_hide };
-            let labels = [...buttonLabels];
-            labels[index] = "p";
-            labels[index_player] = playerCoord.hide;
-            setButtonLabels(labels);
-            setPlayerCoord(new_player);
+            if (!isWall(upper, content, data.width, data.height)) {
+                const index = toIndex(upper, data.width, data.height);
+                const index_player = toIndex(playerCoord, data.width, data.height);
+                const new_hide = buttonLabels[index];
+                const new_player = { x: playerCoord.x, y: playerCoord.y + 1, hide: new_hide };
+                let labels = [...buttonLabels];
+                labels[index] = "p";
+                labels[index_player] = playerCoord.hide;
+                setButtonLabels(labels);
+                setPlayerCoord(new_player);
+            }
         }
     }
     function moveLeft() {
         if (playerCoord.x != 0) {
             const upper = { x: playerCoord.x - 1, y: playerCoord.y, hide: playerCoord.hide };
-            const index = toIndex(upper, data.width, data.height);
-            const index_player = toIndex(playerCoord, data.width, data.height);
-            const new_hide = buttonLabels[index];
-            const new_player = { x: playerCoord.x - 1, y: playerCoord.y, hide: new_hide };
-            let labels = [...buttonLabels];
-            labels[index] = "p";
-            labels[index_player] = playerCoord.hide;
-            setButtonLabels(labels);
-            setPlayerCoord(new_player);
+            if (!isWall(upper, content, data.width, data.height)) {
+                const index = toIndex(upper, data.width, data.height);
+                const index_player = toIndex(playerCoord, data.width, data.height);
+                const new_hide = buttonLabels[index];
+                const new_player = { x: playerCoord.x - 1, y: playerCoord.y, hide: new_hide };
+                let labels = [...buttonLabels];
+                labels[index] = "p";
+                labels[index_player] = playerCoord.hide;
+                setButtonLabels(labels);
+                setPlayerCoord(new_player);
+            }
         }
     }
     function moveRight() {
         if (playerCoord.x != data.width - 1) {
             const upper = { x: playerCoord.x + 1, y: playerCoord.y, hide: playerCoord.hide };
-            const index = toIndex(upper, data.width, data.height);
-            const index_player = toIndex(playerCoord, data.width, data.height);
-            const new_hide = buttonLabels[index];
-            const new_player = { x: playerCoord.x + 1, y: playerCoord.y, hide: new_hide };
-            let labels = [...buttonLabels];
-            labels[index] = "p";
-            labels[index_player] = playerCoord.hide;
-            setButtonLabels(labels);
-            setPlayerCoord(new_player);
+            if (!isWall(upper, content, data.width, data.height)) {
+                const index = toIndex(upper, data.width, data.height);
+                const index_player = toIndex(playerCoord, data.width, data.height);
+                const new_hide = buttonLabels[index];
+                const new_player = { x: playerCoord.x + 1, y: playerCoord.y, hide: new_hide };
+                let labels = [...buttonLabels];
+                labels[index] = "p";
+                labels[index_player] = playerCoord.hide;
+                setButtonLabels(labels);
+                setPlayerCoord(new_player);
+            }
         }
     }
 
