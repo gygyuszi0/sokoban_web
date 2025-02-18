@@ -125,7 +125,7 @@ export default function RouteComponent() {
     }
 
     function moveDown() {
-        if (playerCoord.y != data.height-1) {
+        if (playerCoord.y != data.height - 1) {
             const upper = { x: playerCoord.x, y: playerCoord.y + 1, hide: playerCoord.hide };
             const index = toIndex(upper, data.width, data.height);
             const index_player = toIndex(playerCoord, data.width, data.height);
@@ -140,11 +140,25 @@ export default function RouteComponent() {
     }
     function moveLeft() {
         if (playerCoord.x != 0) {
-            const upper = { x: playerCoord.x -1 , y: playerCoord.y, hide: playerCoord.hide };
+            const upper = { x: playerCoord.x - 1, y: playerCoord.y, hide: playerCoord.hide };
             const index = toIndex(upper, data.width, data.height);
             const index_player = toIndex(playerCoord, data.width, data.height);
             const new_hide = buttonLabels[index];
-            const new_player = { x: playerCoord.x -1 , y: playerCoord.y, hide: new_hide };
+            const new_player = { x: playerCoord.x - 1, y: playerCoord.y, hide: new_hide };
+            let labels = [...buttonLabels];
+            labels[index] = "p";
+            labels[index_player] = playerCoord.hide;
+            setButtonLabels(labels);
+            setPlayerCoord(new_player);
+        }
+    }
+    function moveRight() {
+        if (playerCoord.x != data.width - 1) {
+            const upper = { x: playerCoord.x + 1, y: playerCoord.y, hide: playerCoord.hide };
+            const index = toIndex(upper, data.width, data.height);
+            const index_player = toIndex(playerCoord, data.width, data.height);
+            const new_hide = buttonLabels[index];
+            const new_player = { x: playerCoord.x + 1, y: playerCoord.y, hide: new_hide };
             let labels = [...buttonLabels];
             labels[index] = "p";
             labels[index_player] = playerCoord.hide;
@@ -174,7 +188,7 @@ export default function RouteComponent() {
                 <div className="play-navigation">
                     <button className="play-navigation-button" onClick={() => moveLeft()}>{String.fromCodePoint(0x2B05)}</button>
                     <button className="play-navigation-button" onClick={() => moveDown()}>{String.fromCodePoint(0x2B07)}</button>
-                    <button className="play-navigation-button">{String.fromCodePoint(0x27A1)}</button>
+                    <button className="play-navigation-button" onClick={() => moveRight()}>{String.fromCodePoint(0x27A1)}</button>
                 </div>
             </div>
         </>
