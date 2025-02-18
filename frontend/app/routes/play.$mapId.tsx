@@ -3,17 +3,32 @@ import { useLoaderData, isRouteErrorResponse, useRouteError, useParams } from "@
 import { useState } from "react";
 
 interface coordinate {
-    x:number, 
-    y:number
+    x: number,
+    y: number
 };
 
 
-function toCoordinate(value:number, width:number, height:number){
-    const coordY = Math.floor(value/height);
+function toCoordinate(value: number, width: number, height: number) {
+    const coordY = Math.floor(value / height);
     const coordX = value % width;
-    return {x: coordX, y:coordY};
+    return { x: coordX, y: coordY };
 }
 
+function findCoordinates(content: string, pattern: string, width: number, height: number) {
+    const coordinates = [];
+    for (let index = 0; index < content.length && index != -1; index++) {
+        const i = content.indexOf(pattern, index);
+        if (i == -1) {
+            break;
+        }
+        console.log("index : %d", i);
+        coordinates.push(toCoordinate(i, width, height));
+        index = i;
+    }
+    console.log("index : done");
+    console.log("box_coordinates :", coordinates);
+    return coordinates
+}
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const Name = "teszt";
     const Content = "ssswtpbss";
@@ -21,34 +36,20 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     const height = 3;
 
     const playerCoordinate = toCoordinate(Content.indexOf("p"), width, height);
-    const boxCoordinates = [];
-    for (let index = 0; index < Content.length && index != -1; index++) {
-        const i = Content.indexOf("b", index);
-        if (i == -1) {
-            break;
-        }
-        console.log("index : %d", i);
-        boxCoordinates.push(toCoordinate(i, width, height));
-        index = i;
-    }
-    console.log("index : done");
-    console.log("box_coordinates :", boxCoordinates);
-    
-    
+    const boxCoordinates = findCoordinates(Content, "b", width, height);
+    const targetCoordinates = findCoordinates(Content, "t", width, height);
+
     const startCoordinateX = 2;
     const startCoordinateY = 1;
-    
-    // const boxCoordinates = [{x:0, y:0}, {x:0, y:0}, {x:0, y:0}]
 
     const response = {
         mapName: Name,
         mapContent: Content,
         width: width,
         height: height,
-        startCoordinate: {
-            x: startCoordinateX,
-            y: startCoordinateY
-        }
+        startCoordinate:playerCoordinate,
+        box: boxCoordinates,
+        target: targetCoordinates
     };
 
     return response;
