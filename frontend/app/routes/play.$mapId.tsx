@@ -1,17 +1,23 @@
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
-import { useLoaderData, isRouteErrorResponse, useRouteError, useParams } from "@remix-run/react";
+import { useLoaderData, isRouteErrorResponse, useRouteError, useParams, redirect, Scripts } from "@remix-run/react";
+import { console } from "node:inspector";
 import { useState } from "react";
 
 interface coordinate {
     x: number,
-    y: number
+    y: number,
+    hide: string
 };
 
 
 function toCoordinate(value: number, width: number, height: number) {
     const coordY = Math.floor(value / height);
     const coordX = value % width;
-    return { x: coordX, y: coordY };
+    return { x: coordX, y: coordY, hide: "s" };
+}
+
+function toIndex(coord: coordinate, width: number, height: number) {
+    return coord.y * height + coord.x;
 }
 
 function findCoordinates(content: string, pattern: string, width: number, height: number) {
@@ -47,7 +53,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
         mapContent: Content,
         width: width,
         height: height,
-        startCoordinate:playerCoordinate,
+        startCoordinate: playerCoordinate,
         box: boxCoordinates,
         target: targetCoordinates
     };
@@ -64,7 +70,7 @@ export default function RouteComponent() {
     const params = useParams();
     const content = data?.mapContent;
 
-    const [buttonLabels, setButtonLabels] = useState(data?.mapContent);
+    const [buttonLabels, setButtonLabels] = useState([...data?.mapContent]);
 
     function MapItem(props) {
         const name = "item_" + props.index;
@@ -101,13 +107,28 @@ export default function RouteComponent() {
         );
     }
 
-    const [playerCoord, setPlayerCoord] = useState([0, 0]);
+    const [playerCoord, setPlayerCoord] = useState(data.startCoordinate);
 
+    function moveUp() {
+        if (playerCoord.y != 0) {
+            const upper = { x: playerCoord.x, y: playerCoord.y - 1, hide: playerCoord.hide };
+            const index = toIndex(upper, data.width, data.height);
+            const index_player = toIndex(playerCoord, data.width, data.height);
+            const new_hide = buttonLabels[index];
+            const new_player = { x: playerCoord.x, y: playerCoord.y - 1, hide: new_hide };
+            let labels = [...buttonLabels];
+            labels[index] = "p";
+            labels[index_player] = playerCoord.hide;
+            setButtonLabels(labels);
+            setPlayerCoord(new_player);
+        }
+    }
     return (
         <>
+            <Scripts></Scripts>
             <h1 className="sub-title">Play</h1>
             <p>Map id : {params.mapId}</p>
-            <p>Map content : {content.length}</p>
+            <p>player : {JSON.stringify(playerCoord)}</p>
 
             <div className="map-page">
                 <div className="map-grid">
@@ -117,7 +138,7 @@ export default function RouteComponent() {
             <div className="play-navigation-container">
                 <div className="play-navigation">
                     <button className="play-navigation-button-hidden" disabled={true}></button>
-                    <button className="play-navigation-button">{String.fromCodePoint(0x2B06)}</button>
+                    <button className="play-navigation-button" onClick={() => (moveUp())}>{String.fromCodePoint(0x2B06)}</button>
                     <button className="play-navigation-button-hidden" disabled={true}></button>
                 </div>
                 <div className="play-navigation">
