@@ -123,6 +123,22 @@ export default function RouteComponent() {
             setPlayerCoord(new_player);
         }
     }
+
+    function moveDown() {
+        if (playerCoord.y != data.height-1) {
+            const upper = { x: playerCoord.x, y: playerCoord.y + 1, hide: playerCoord.hide };
+            const index = toIndex(upper, data.width, data.height);
+            const index_player = toIndex(playerCoord, data.width, data.height);
+            const new_hide = buttonLabels[index];
+            const new_player = { x: playerCoord.x, y: playerCoord.y + 1, hide: new_hide };
+            let labels = [...buttonLabels];
+            labels[index] = "p";
+            labels[index_player] = playerCoord.hide;
+            setButtonLabels(labels);
+            setPlayerCoord(new_player);
+        }
+    }
+
     return (
         <>
             <Scripts></Scripts>
@@ -143,7 +159,7 @@ export default function RouteComponent() {
                 </div>
                 <div className="play-navigation">
                     <button className="play-navigation-button">{String.fromCodePoint(0x2B05)}</button>
-                    <button className="play-navigation-button">{String.fromCodePoint(0x2B07)}</button>
+                    <button className="play-navigation-button" onClick={() => moveDown()}>{String.fromCodePoint(0x2B07)}</button>
                     <button className="play-navigation-button">{String.fromCodePoint(0x27A1)}</button>
                 </div>
             </div>
