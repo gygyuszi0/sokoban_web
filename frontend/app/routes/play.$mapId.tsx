@@ -9,7 +9,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     const startCoordinateY = 1;
     const width = 3;
     const height = 3;
-    
+
 
     const response = {
         mapName: Name,
@@ -52,7 +52,7 @@ export default function RouteComponent() {
             </div>
         );
     }
-    
+
     const MapGrid = (props) => {
 
         let rows = [];
@@ -80,6 +80,19 @@ export default function RouteComponent() {
             <div className="map-page">
                 <div className="map-grid">
                     <MapGrid width={data?.width} height={data?.height}></MapGrid>
+                </div>
+            </div>
+            <div className="play-navigation-container">
+                <div className="play-navigation">
+                    <button className="play-navigation-button-hidden" disabled={true}></button>
+                    <button className="play-navigation-button">{String.fromCodePoint(0x2B06)}</button>
+                    <button className="play-navigation-button-hidden" disabled={true}></button>
+                </div>
+                <div className="play-navigation">
+
+                    <button className="play-navigation-button">{String.fromCodePoint(0x2B05)}</button>
+                    <button className="play-navigation-button">{String.fromCodePoint(0x2B07)}</button>
+                    <button className="play-navigation-button">{String.fromCodePoint(0x27A1)}</button>
                 </div>
             </div>
         </>

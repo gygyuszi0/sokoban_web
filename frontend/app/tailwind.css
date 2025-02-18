@@ -169,3 +169,24 @@ nav {
     shadow-md
     bg-zinc-500;
 }
+
+.play-navigation-container{
+    @apply flex flex-col
+        m-4 p-4 gap-2
+        bg-gray-100
+}
+
+.play-navigation {
+    @apply flex flex-row gap-2
+        justify-end
+}
+
+.play-navigation-button {
+    @apply w-8 bg-gray-400
+        rounded
+        shadow-md
+}
+
+.play-navigation-button-hidden {
+    @apply w-8
+}
