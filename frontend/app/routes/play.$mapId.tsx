@@ -2,14 +2,43 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { useLoaderData, isRouteErrorResponse, useRouteError, useParams } from "@remix-run/react";
 import { useState } from "react";
 
+interface coordinate {
+    x:number, 
+    y:number
+};
+
+
+function toCoordinate(value:number, width:number, height:number){
+    const coordY = Math.floor(value/height);
+    const coordX = value % width;
+    return {x: coordX, y:coordY};
+}
+
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const Name = "teszt";
     const Content = "ssswtpbss";
-    const startCoordinateX = 2;
-    const startCoordinateY = 1;
     const width = 3;
     const height = 3;
 
+    const playerCoordinate = toCoordinate(Content.indexOf("p"), width, height);
+    const boxCoordinates = [];
+    for (let index = 0; index < Content.length && index != -1; index++) {
+        const i = Content.indexOf("b", index);
+        if (i == -1) {
+            break;
+        }
+        console.log("index : %d", i);
+        boxCoordinates.push(toCoordinate(i, width, height));
+        index = i;
+    }
+    console.log("index : done");
+    console.log("box_coordinates :", boxCoordinates);
+    
+    
+    const startCoordinateX = 2;
+    const startCoordinateY = 1;
+    
+    // const boxCoordinates = [{x:0, y:0}, {x:0, y:0}, {x:0, y:0}]
 
     const response = {
         mapName: Name,
@@ -71,6 +100,8 @@ export default function RouteComponent() {
         );
     }
 
+    const [playerCoord, setPlayerCoord] = useState([0, 0]);
+
     return (
         <>
             <h1 className="sub-title">Play</h1>
@@ -89,7 +120,6 @@ export default function RouteComponent() {
                     <button className="play-navigation-button-hidden" disabled={true}></button>
                 </div>
                 <div className="play-navigation">
-
                     <button className="play-navigation-button">{String.fromCodePoint(0x2B05)}</button>
                     <button className="play-navigation-button">{String.fromCodePoint(0x2B07)}</button>
                     <button className="play-navigation-button">{String.fromCodePoint(0x27A1)}</button>
