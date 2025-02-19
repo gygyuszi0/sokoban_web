@@ -202,6 +202,24 @@ export default function RouteComponent() {
             const upper = { x: playerCoord.x, y: playerCoord.y + 1, hide: playerCoord.hide };
             let new_labels = buttonLabels;
             if (!isWall(upper, new_labels, data.width, data.height)) {
+                if (isBox(upper, new_labels, data.width, data.height)) {
+                    const target = { x: upper.x, y: upper.y + 1, hide: upper.hide };
+                    if (upper.y == data.height - 1 || isWall(target, new_labels, data.width, data.height)
+                        || isBox(target, new_labels, data.width, data.height)) {
+                        return;
+                    }
+                    let box = findBox(upper);   
+                    const new_data = moveDownSymbol(target, box, "b", new_labels);
+                    box = new_data.new_coord;
+                    new_labels = new_data.labels;
+
+                    const new_box = setBox(upper, new_data.new_coord);
+                    setBoxCoord(new_box);
+                    // setButtonLabels(new_labels);
+                    const new_content = [...buttonLabels];
+
+                }
+                
                 const new_data = moveDownSymbol(upper, playerCoord, "p", new_labels);
                 setButtonLabels(new_data.labels);
                 setPlayerCoord(new_data.new_coord);
