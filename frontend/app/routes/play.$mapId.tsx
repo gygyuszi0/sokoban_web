@@ -121,7 +121,7 @@ export default function RouteComponent() {
     }
 
     const [playerCoord, setPlayerCoord] = useState(data.startCoordinate);
-    const [nextIsBox, setNextIsBox] = useState(false);
+    const [BoxCoord, setBoxCoord] = useState(data.box);
 
 
     function moveUpSymbol(upper: coordinate, current: coordinate, symbol: string, content: string[]) {
@@ -135,6 +135,16 @@ export default function RouteComponent() {
         return { labels: labels, new_coord: new_player };
     }
 
+    function findBox(coord:coordinate){
+        for (let index = 0; index < BoxCoord.length; index++) {
+            const box = BoxCoord[index];
+            if (box.x == coord.x && box.y == coord.y){
+                return box;
+            }
+        }
+        return {x:0,y:0,hide:"s"};
+    }
+
     function moveUp() {
         if (playerCoord.y != 0) {
             const upper = { x: playerCoord.x, y: playerCoord.y - 1, hide: playerCoord.hide };
@@ -145,7 +155,8 @@ export default function RouteComponent() {
                         return;
                     }
                     const target = { x: upper.x, y: upper.y - 1, hide: upper.hide };
-                    const labels = moveUpSymbol(target, upper, "b", new_labels).labels;
+                    const box = findBox(upper);
+                    const labels = moveUpSymbol(target, box, "b", new_labels).labels;
                     new_labels = labels;
 
                     // setButtonLabels(new_labels);
@@ -214,7 +225,6 @@ export default function RouteComponent() {
             <h1 className="sub-title">Play</h1>
             <p>Map id : {params.mapId}</p>
             <p>player : {JSON.stringify(playerCoord)}</p>
-            <p>next box : {nextIsBox}</p>
 
             <div className="map-page">
                 <div className="map-grid">
