@@ -50,9 +50,9 @@ function findCoordinates(content: string, pattern: string, width: number, height
 }
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const Name = "teszt";
-    const Content = "sssbwptss";
-    const width = 3;
-    const height = 3;
+    const Content = "sbsssptssbsswsts";
+    const width = 4;
+    const height = 4;
 
     const playerCoordinate = toCoordinate(Content.indexOf("p"), width, height);
     const boxCoordinates = findCoordinates(Content, "b", width, height);
