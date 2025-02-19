@@ -145,6 +145,19 @@ export default function RouteComponent() {
         return {x:0,y:0,hide:"s"};
     }
 
+    function setBox(old_coord:coordinate, new_coord:coordinate){
+        const new_box = BoxCoord;
+        for (let index = 0; index < BoxCoord.length; index++) {
+            const box = new_box[index];
+            if (box.x == old_coord.x && box.y == old_coord.y){
+                new_box[index].x = new_coord.x;
+                new_box[index].y = new_coord.y;
+                new_box[index].hide = new_coord.hide;
+            }
+        }
+        return new_box;
+    }
+
     function moveUp() {
         if (playerCoord.y != 0) {
             const upper = { x: playerCoord.x, y: playerCoord.y - 1, hide: playerCoord.hide };
@@ -157,9 +170,11 @@ export default function RouteComponent() {
                         return;
                     }
                     const box = findBox(upper);
-                    const labels = moveUpSymbol(target, box, "b", new_labels).labels;
-                    new_labels = labels;
+                    const new_data = moveUpSymbol(target, box, "b", new_labels);
+                    new_labels = new_data.labels;
 
+                    const new_box = setBox(upper, new_data.new_coord);
+                    setBoxCoord(new_box);
                     // setButtonLabels(new_labels);
                     const new_content = [...buttonLabels];
 
@@ -226,6 +241,7 @@ export default function RouteComponent() {
             <h1 className="sub-title">Play</h1>
             <p>Map id : {params.mapId}</p>
             <p>player : {JSON.stringify(playerCoord)}</p>
+            <p>box : {JSON.stringify(BoxCoord)}</p>
 
             <div className="map-page">
                 <div className="map-grid">
