@@ -50,7 +50,7 @@ function findCoordinates(content: string, pattern: string, width: number, height
 }
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const Name = "teszt";
-    const Content = "ssstwpbss";
+    const Content = "sssbwptss";
     const width = 3;
     const height = 3;
 
@@ -121,23 +121,38 @@ export default function RouteComponent() {
     }
 
     const [playerCoord, setPlayerCoord] = useState(data.startCoordinate);
+    const [nextIsBox, setNextIsBox] = useState(false);
 
-    function moveUpSymbol(upper : coordinate, current : coordinate, symbol : string) {
+
+    function moveUpSymbol(upper: coordinate, current: coordinate, symbol: string, content: string[]) {
         const index = toIndex(upper, data.width, data.height);
         const index_player = toIndex(current, data.width, data.height);
-        const new_hide = buttonLabels[index];
+        const new_hide = content[index];
         const new_player = { x: current.x, y: current.y - 1, hide: new_hide };
-        let labels = [...buttonLabels];
+        let labels = [...content];
         labels[index] = symbol;
         labels[index_player] = current.hide;
-        return {labels : labels, new_coord : new_player};
+        return { labels: labels, new_coord: new_player };
     }
 
     function moveUp() {
         if (playerCoord.y != 0) {
             const upper = { x: playerCoord.x, y: playerCoord.y - 1, hide: playerCoord.hide };
+            let new_labels = buttonLabels;
             if (!isWall(upper, content, data.width, data.height)) {
-                const new_data = moveUpSymbol(upper, playerCoord, "p");
+                if (isBox(upper, content, data.width, data.height)) {
+                    if (upper.y == 0) {
+                        return;
+                    }
+                    const target = { x: upper.x, y: upper.y - 1, hide: upper.hide };
+                    const labels = moveUpSymbol(target, upper, "b", new_labels).labels;
+                    new_labels = labels;
+
+                    // setButtonLabels(new_labels);
+                    const new_content = [...buttonLabels];
+
+                }
+                const new_data = moveUpSymbol(upper, playerCoord, "p", new_labels);
                 setButtonLabels(new_data.labels);
                 setPlayerCoord(new_data.new_coord);
             }
@@ -199,6 +214,7 @@ export default function RouteComponent() {
             <h1 className="sub-title">Play</h1>
             <p>Map id : {params.mapId}</p>
             <p>player : {JSON.stringify(playerCoord)}</p>
+            <p>next box : {nextIsBox}</p>
 
             <div className="map-page">
                 <div className="map-grid">
