@@ -20,13 +20,13 @@ function toIndex(coord: coordinate, width: number, height: number) {
     return coord.y * height + coord.x;
 }
 
-function isWall(coord: coordinate, content: string, width: number, height: number) {
+function isWall(coord: coordinate, content: string[], width: number, height: number) {
     const index = toIndex(coord, width, height);
     const field = content[index];
     return field == "w";
 }
 
-function isBox(coord: coordinate, content: string, width: number, height: number) {
+function isBox(coord: coordinate, content: string[], width: number, height: number) {
     const index = toIndex(coord, width, height);
     const field = content[index];
     return field == "b";
@@ -149,12 +149,13 @@ export default function RouteComponent() {
         if (playerCoord.y != 0) {
             const upper = { x: playerCoord.x, y: playerCoord.y - 1, hide: playerCoord.hide };
             let new_labels = buttonLabels;
-            if (!isWall(upper, content, data.width, data.height)) {
-                if (isBox(upper, content, data.width, data.height)) {
-                    if (upper.y == 0) {
+            if (!isWall(upper, new_labels, data.width, data.height)) {
+                if (isBox(upper, new_labels, data.width, data.height)) {
+                    const target = { x: upper.x, y: upper.y - 1, hide: upper.hide };
+                    if (upper.y == 0 || isWall(target, new_labels, data.width, data.height)
+                        || isBox(target, new_labels, data.width, data.height)) {
                         return;
                     }
-                    const target = { x: upper.x, y: upper.y - 1, hide: upper.hide };
                     const box = findBox(upper);
                     const labels = moveUpSymbol(target, box, "b", new_labels).labels;
                     new_labels = labels;
