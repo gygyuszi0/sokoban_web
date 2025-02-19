@@ -122,20 +122,26 @@ export default function RouteComponent() {
 
     const [playerCoord, setPlayerCoord] = useState(data.startCoordinate);
 
+    function moveUpSymbol(upper : coordinate) {
+        const index = toIndex(upper, data.width, data.height);
+        const index_player = toIndex(playerCoord, data.width, data.height);
+        const new_hide = buttonLabels[index];
+        const new_player = { x: playerCoord.x, y: playerCoord.y - 1, hide: new_hide };
+        let labels = [...buttonLabels];
+        labels[index] = "p";
+        labels[index_player] = playerCoord.hide;
+        return {labels : labels, new_coord : new_player};
+    }
+
     function moveUp() {
         if (playerCoord.y != 0) {
             const upper = { x: playerCoord.x, y: playerCoord.y - 1, hide: playerCoord.hide };
             if (!isWall(upper, content, data.width, data.height)) {
-                const index = toIndex(upper, data.width, data.height);
-                const index_player = toIndex(playerCoord, data.width, data.height);
-                const new_hide = buttonLabels[index];
-                const new_player = { x: playerCoord.x, y: playerCoord.y - 1, hide: new_hide };
-                let labels = [...buttonLabels];
-                labels[index] = "p";
-                labels[index_player] = playerCoord.hide;
-                setButtonLabels(labels);
-                setPlayerCoord(new_player);
+                const new_data = moveUpSymbol(upper);
+                setButtonLabels(new_data.labels);
+                setPlayerCoord(new_data.new_coord);
             }
+
         }
     }
     function moveDown() {
