@@ -134,7 +134,6 @@ export default function RouteComponent() {
         labels[index_player] = current.hide;
         return { labels: labels, new_coord: new_player };
     }
-    
     function moveDownSymbol(upper: coordinate, current: coordinate, symbol: string, content: string[]) {
         const index = toIndex(upper, data.width, data.height);
         const index_player = toIndex(current, data.width, data.height);
@@ -155,22 +154,32 @@ export default function RouteComponent() {
         labels[index_player] = current.hide;
         return { labels: labels, new_coord: new_player };
     }
+    function moveRightSymbol(upper: coordinate, current: coordinate, symbol: string, content: string[]) {
+        const index = toIndex(upper, data.width, data.height);
+        const index_player = toIndex(current, data.width, data.height);
+        const new_hide = content[index];
+        const new_player = { x: current.x + 1, y: current.y, hide: new_hide };
+        let labels = [...content];
+        labels[index] = symbol;
+        labels[index_player] = current.hide;
+        return { labels: labels, new_coord: new_player };
+    }
 
-    function findBox(coord:coordinate){
+    function findBox(coord: coordinate) {
         for (let index = 0; index < BoxCoord.length; index++) {
             const box = BoxCoord[index];
-            if (box.x == coord.x && box.y == coord.y){
+            if (box.x == coord.x && box.y == coord.y) {
                 return box;
             }
         }
-        return {x:0,y:0,hide:"s"};
+        return { x: 0, y: 0, hide: "s" };
     }
 
-    function setBox(old_coord:coordinate, new_coord:coordinate){
+    function setBox(old_coord: coordinate, new_coord: coordinate) {
         const new_box = BoxCoord;
         for (let index = 0; index < BoxCoord.length; index++) {
             const box = new_box[index];
-            if (box.x == old_coord.x && box.y == old_coord.y){
+            if (box.x == old_coord.x && box.y == old_coord.y) {
                 new_box[index].x = new_coord.x;
                 new_box[index].y = new_coord.y;
                 new_box[index].hide = new_coord.hide;
@@ -218,7 +227,7 @@ export default function RouteComponent() {
                         || isBox(target, new_labels, data.width, data.height)) {
                         return;
                     }
-                    let box = findBox(upper);   
+                    let box = findBox(upper);
                     const new_data = moveDownSymbol(target, box, "b", new_labels);
                     box = new_data.new_coord;
                     new_labels = new_data.labels;
@@ -229,7 +238,7 @@ export default function RouteComponent() {
                     const new_content = [...buttonLabels];
 
                 }
-                
+
                 const new_data = moveDownSymbol(upper, playerCoord, "p", new_labels);
                 setButtonLabels(new_data.labels);
                 setPlayerCoord(new_data.new_coord);
@@ -242,18 +251,17 @@ export default function RouteComponent() {
             let new_labels = buttonLabels;
             if (!isWall(upper, new_labels, data.width, data.height)) {
                 if (isBox(upper, new_labels, data.width, data.height)) {
-                    const target = { x: upper.x - 1 , y: upper.y, hide: upper.hide };
+                    const target = { x: upper.x - 1, y: upper.y, hide: upper.hide };
                     if (upper.x == 0 || isWall(target, new_labels, data.width, data.height)) {
                         return;
                     }
-                    let box = findBox(upper);   
+                    let box = findBox(upper);
                     const new_data = moveLeftSymbol(target, box, "b", new_labels);
                     box = new_data.new_coord;
                     new_labels = new_data.labels;
 
                     const new_box = setBox(upper, new_data.new_coord);
                     setBoxCoord(new_box);
-
                 }
                 const new_data = moveLeftSymbol(upper, playerCoord, "p", new_labels);
                 new_labels = new_data.labels;
@@ -267,15 +275,27 @@ export default function RouteComponent() {
     function moveRight() {
         if (playerCoord.x != data.width - 1) {
             const upper = { x: playerCoord.x + 1, y: playerCoord.y, hide: playerCoord.hide };
-            if (!isWall(upper, content, data.width, data.height)) {
-                const index = toIndex(upper, data.width, data.height);
-                const index_player = toIndex(playerCoord, data.width, data.height);
-                const new_hide = buttonLabels[index];
-                const new_player = { x: playerCoord.x + 1, y: playerCoord.y, hide: new_hide };
-                let labels = [...buttonLabels];
-                labels[index] = "p";
-                labels[index_player] = playerCoord.hide;
-                setButtonLabels(labels);
+            let new_labels = buttonLabels;
+            if (!isWall(upper, new_labels, data.width, data.height)) {
+                if (isBox(upper, new_labels, data.width, data.height)) {
+                    const target = { x: upper.x + 1, y: upper.y, hide: upper.hide };
+                    const wall = isWall(target, new_labels, data.width, data.height)
+                    if (upper.x == data.width - 1 || wall) {
+                        return;
+                    }
+                    let box = findBox(upper);
+                    const new_data = moveRightSymbol(target, box, "b", new_labels);
+                    box = new_data.new_coord;
+                    new_labels = new_data.labels;
+
+                    const new_box = setBox(upper, new_data.new_coord);
+                    setBoxCoord(new_box);
+                }
+                const new_data = moveRightSymbol(upper, playerCoord, "p", new_labels);
+                new_labels = new_data.labels;
+                const new_player = new_data.new_coord;
+
+                setButtonLabels(new_labels);
                 setPlayerCoord(new_player);
             }
         }
