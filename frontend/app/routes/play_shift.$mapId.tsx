@@ -88,6 +88,17 @@ export default function RouteComponent() {
     const content = data?.mapContent;
 
     const [buttonLabels, setButtonLabels] = useState([...data?.mapContent]);
+    const [IsShift, setIsShift] = useState(false);
+    const [MessageState, setMessageState] = useState("");
+
+    function handleShift(){
+        if (IsShift){
+            setMessageState("Shift on");
+        }
+        else {
+            setMessageState("Shift off");
+        }
+    }
 
     function MapItem(props) {
         const name = "item_" + props.index;
@@ -153,7 +164,6 @@ export default function RouteComponent() {
 
     const [playerCoord, setPlayerCoord] = useState(data.startCoordinate);
     const [BoxCoord, setBoxCoord] = useState(data.box);
-    const [MessageState, setMessageState] = useState("");
     const [FinshState, setFinshState] = useState(false);
 
     function isFinish() {
@@ -365,6 +375,7 @@ export default function RouteComponent() {
             </div>
             <div className="play-navigation-container">
                 <div className="play-navigation">
+                    <button className="play-navigation-button">Shift</button>
                     <button className="play-navigation-button-hidden" disabled={true}></button>
                     <button className="play-navigation-button" onClick={() => (moveUp())}>{String.fromCodePoint(0x2B06)}</button>
                     <button className="play-navigation-button-hidden" disabled={true}></button>

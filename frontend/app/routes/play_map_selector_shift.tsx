@@ -22,7 +22,7 @@ export default function RouteComponent() {
     const data = useLoaderData<typeof loader>()
 
     function MapItem(props) {
-        const target = "./play/" + props.mapId;
+        const target = "./play_shift/" + props.mapId;
         return (
             <a className="map-item" href={target}>
                 <div className="map-item-field">{props.mapId}</div>
