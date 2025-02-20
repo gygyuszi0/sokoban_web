@@ -31,6 +31,11 @@ function isBox(coord: coordinate, content: string[], width: number, height: numb
     const field = content[index];
     return field == "b";
 }
+function isTarget(coord: coordinate, content: string[], width: number, height: number) {
+    const index = toIndex(coord, width, height);
+    const field = content[index];
+    return field == "t";
+}
 
 
 function findCoordinates(content: string, pattern: string, width: number, height: number) {
@@ -91,8 +96,8 @@ export default function RouteComponent() {
     const [IsShift, setIsShift] = useState(false);
     const [MessageState, setMessageState] = useState("");
 
-    function handleShift(){
-        if (IsShift){
+    function handleShift() {
+        if (IsShift) {
             setMessageState("Shift on");
         }
         else {
@@ -135,7 +140,7 @@ export default function RouteComponent() {
         );
     }
 
-    function toInt(param : boolean){
+    function toInt(param: boolean) {
         if (param) {
             return 1;
         }
@@ -262,6 +267,18 @@ export default function RouteComponent() {
                     // setButtonLabels(new_labels);
                     const new_content = [...buttonLabels];
 
+                }
+                if (isTarget(upper, new_labels, data.width, data.height) &&
+                    IsShift) {
+                        const target = { x: upper.x, y: upper.y - 1, hide: upper.hide };
+                        if (upper.y == 0 
+                            || isWall(target, new_labels, data.width, data.height)
+                            || isBox(target, new_labels, data.width, data.height)
+                            || isTarget(target, new_labels, data.width, data.height)) {
+                            return;
+                        }
+    
+                    
                 }
                 const new_data = moveUpSymbol(upper, playerCoord, "p", new_labels);
                 setButtonLabels(new_data.labels);

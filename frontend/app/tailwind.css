@@ -182,13 +182,13 @@ nav {
 }
 
 .play-navigation-button {
-    @apply w-8 bg-gray-400
+    @apply w-16 bg-gray-400
         rounded
         shadow-md
 }
 
 .play-navigation-button-hidden {
-    @apply w-8
+    @apply w-16
 }
 
 .message-container {
