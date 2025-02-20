@@ -241,7 +241,14 @@ export default function RouteComponent() {
             const upper = { x: playerCoord.x - 1, y: playerCoord.y, hide: playerCoord.hide };
             let new_labels = buttonLabels;
             if (!isWall(upper, new_labels, data.width, data.height)) {
-
+                if (isBox(upper, new_labels, data.width, data.height)) {
+                    const target = { x: upper.x - 1 , y: upper.y, hide: upper.hide };
+                    if (upper.x == 0 || isWall(target, new_labels, data.width, data.height)) {
+                        return;
+                    }
+                   const new_box = moveLeftSymbol(target, upper, "b", new_labels);
+                   new_labels = new_box.labels;
+                }
                 const new_data = moveLeftSymbol(upper, playerCoord, "p", new_labels);
                 new_labels = new_data.labels;
                 const new_player = new_data.new_coord;
