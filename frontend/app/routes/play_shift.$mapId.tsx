@@ -366,6 +366,7 @@ export default function RouteComponent() {
             <p>Map id : {params.mapId}</p>
             <p>player : {JSON.stringify(playerCoord)}</p>
             <p>box : {JSON.stringify(BoxCoord)}</p>
+            <p>shift : {JSON.stringify(IsShift)}</p>
             <Message msg={MessageState}></Message>
 
             <div className="map-page">
@@ -375,7 +376,7 @@ export default function RouteComponent() {
             </div>
             <div className="play-navigation-container">
                 <div className="play-navigation">
-                    <button className="play-navigation-button">Shift</button>
+                    <button className="play-navigation-button" onClick={() => (setIsShift(!IsShift))}>Shift</button>
                     <button className="play-navigation-button-hidden" disabled={true}></button>
                     <button className="play-navigation-button" onClick={() => (moveUp())}>{String.fromCodePoint(0x2B06)}</button>
                     <button className="play-navigation-button-hidden" disabled={true}></button>
