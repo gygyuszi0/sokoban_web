@@ -125,7 +125,7 @@ export default function RouteComponent() {
             <>
                 <form className="message-container" method="post">
                     <p className="message-text">{props.msg}</p>
-                    <button type="submit">OK</button>
+                    <button className="message-button" type="submit">OK</button>
                 </form>
             </>
         );
