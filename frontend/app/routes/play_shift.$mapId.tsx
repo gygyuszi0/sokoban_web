@@ -55,7 +55,7 @@ function findCoordinates(content: string, pattern: string, width: number, height
 }
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const Name = "teszt";
-    const Content = "sbtwstttpbssssss";
+    const Content = "sbtwttttpbssssss";
     const width = 4;
     const height = 4;
 
@@ -277,8 +277,9 @@ export default function RouteComponent() {
                             || isTarget(target, new_labels, data.width, data.height)) {
                             return;
                         }
-    
-                    
+                        
+                        const new_data = moveUpSymbol(target, upper, "t", new_labels);
+                        new_labels = new_data.labels;
                 }
                 const new_data = moveUpSymbol(upper, playerCoord, "p", new_labels);
                 setButtonLabels(new_data.labels);
