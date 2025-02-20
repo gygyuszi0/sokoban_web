@@ -190,3 +190,9 @@ nav {
 .play-navigation-button-hidden {
     @apply w-8
 }
+
+.message-container {
+    @apply flex flex-row 
+    w-full p-2 gap-2
+    bg-gray-100
+}
