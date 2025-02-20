@@ -55,7 +55,7 @@ function findCoordinates(content: string, pattern: string, width: number, height
 }
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const Name = "teszt";
-    const Content = "sbtsspsssbsswstw";
+    const Content = "sbtwstttpbssssss";
     const width = 4;
     const height = 4;
 
