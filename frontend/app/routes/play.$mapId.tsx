@@ -50,7 +50,7 @@ function findCoordinates(content: string, pattern: string, width: number, height
 }
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const Name = "teszt";
-    const Content = "sbsssptssbsswstw";
+    const Content = "sbtsspsssbsswstw";
     const width = 4;
     const height = 4;
 
@@ -120,10 +120,18 @@ export default function RouteComponent() {
         );
     }
 
+    function toInt(param : boolean){
+        if (param) {
+            return 1;
+        }
+        return 0;
+    }
+
     function Message(props) {
         const message = (
             <>
                 <form className="message-container" method="post">
+                    <input type="hidden" name="finish" value={toInt(FinshState)}></input>
                     <p className="message-text">{props.msg}</p>
                     <button className="message-button" type="submit">OK</button>
                 </form>
