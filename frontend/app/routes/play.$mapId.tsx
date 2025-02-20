@@ -1,7 +1,7 @@
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { useLoaderData, isRouteErrorResponse, useRouteError, useParams, redirect, Scripts } from "@remix-run/react";
 import { console } from "node:inspector";
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface coordinate {
     x: number,
@@ -50,7 +50,7 @@ function findCoordinates(content: string, pattern: string, width: number, height
 }
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const Name = "teszt";
-    const Content = "sbsssptssbsswsts";
+    const Content = "sbsssptssbsswstw";
     const width = 4;
     const height = 4;
 
@@ -120,9 +120,28 @@ export default function RouteComponent() {
         );
     }
 
+    function Message(props) {
+        const message = (
+            <>
+                <form className="message-container" method="post">
+                    <p className="message-text">{props.msg}</p>
+                    <button type="submit">OK</button>
+                </form>
+            </>
+        );
+        const empty_message = (
+            <></>
+        );
+        let result = empty_message;
+        if (props.msg != "") {
+            result = message;
+        }
+        return result;
+    }
+
     const [playerCoord, setPlayerCoord] = useState(data.startCoordinate);
     const [BoxCoord, setBoxCoord] = useState(data.box);
-
+    const [MessageState, setMessageState] = useState("message");
 
     function moveUpSymbol(upper: coordinate, current: coordinate, symbol: string, content: string[]) {
         const index = toIndex(upper, data.width, data.height);
@@ -308,6 +327,7 @@ export default function RouteComponent() {
             <p>Map id : {params.mapId}</p>
             <p>player : {JSON.stringify(playerCoord)}</p>
             <p>box : {JSON.stringify(BoxCoord)}</p>
+            <Message msg={MessageState}></Message>
 
             <div className="map-page">
                 <div className="map-grid">
