@@ -311,6 +311,20 @@ export default function RouteComponent() {
                     const new_content = [...buttonLabels];
 
                 }
+                if (isTarget(upper, new_labels, data.width, data.height) &&
+                    IsShift) {
+                        const target = { x: upper.x, y: upper.y + 1, hide: upper.hide };
+                        if (upper.y == 0 
+                            || isWall(target, new_labels, data.width, data.height)
+                            || isBox(target, new_labels, data.width, data.height)
+                            || isTarget(target, new_labels, data.width, data.height)) {
+                            return;
+                        }
+                        
+                        const new_data = moveDownSymbol(target, upper, "t", new_labels);
+                        new_labels = new_data.labels;
+                }
+
 
                 const new_data = moveDownSymbol(upper, playerCoord, "p", new_labels);
                 setButtonLabels(new_data.labels);
