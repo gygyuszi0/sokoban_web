@@ -144,7 +144,7 @@ export default function RouteComponent() {
     const [MessageState, setMessageState] = useState("");
     const [FinshState, setFinshState] = useState(false);
 
-    function isFinish(props) {
+    function isFinish() {
         let result = true;
         for (let index = 0; index < BoxCoord.length; index++) {
             const hidden = BoxCoord[index].hide;
@@ -247,6 +247,7 @@ export default function RouteComponent() {
             }
 
         }
+        isFinish();
     }
     function moveDown() {
         if (playerCoord.y != data.height - 1) {
@@ -276,6 +277,7 @@ export default function RouteComponent() {
                 setPlayerCoord(new_data.new_coord);
             }
         }
+        isFinish();
     }
     function moveLeft() {
         if (playerCoord.x != 0) {
@@ -303,6 +305,7 @@ export default function RouteComponent() {
                 setPlayerCoord(new_player);
             }
         }
+        isFinish();
     }
     function moveRight() {
         if (playerCoord.x != data.width - 1) {
@@ -331,6 +334,7 @@ export default function RouteComponent() {
                 setPlayerCoord(new_player);
             }
         }
+        isFinish();
     }
 
     return (
