@@ -55,7 +55,7 @@ function findCoordinates(content: string, pattern: string, width: number, height
 }
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const Name = "teszt";
-    const Content = "sbtwttttpbssssss";
+    const Content = "ttpwwtssbtssstts";
     const width = 4;
     const height = 4;
 
@@ -270,16 +270,16 @@ export default function RouteComponent() {
                 }
                 if (isTarget(upper, new_labels, data.width, data.height) &&
                     IsShift) {
-                        const target = { x: upper.x, y: upper.y - 1, hide: upper.hide };
-                        if (upper.y == 0 
-                            || isWall(target, new_labels, data.width, data.height)
-                            || isBox(target, new_labels, data.width, data.height)
-                            || isTarget(target, new_labels, data.width, data.height)) {
-                            return;
-                        }
-                        
-                        const new_data = moveUpSymbol(target, upper, "t", new_labels);
-                        new_labels = new_data.labels;
+                    const target = { x: upper.x, y: upper.y - 1, hide: upper.hide };
+                    if (upper.y == 0
+                        || isWall(target, new_labels, data.width, data.height)
+                        || isBox(target, new_labels, data.width, data.height)
+                        || isTarget(target, new_labels, data.width, data.height)) {
+                        return;
+                    }
+
+                    const new_data = moveUpSymbol(target, upper, "t", new_labels);
+                    new_labels = new_data.labels;
                 }
                 const new_data = moveUpSymbol(upper, playerCoord, "p", new_labels);
                 setButtonLabels(new_data.labels);
@@ -313,16 +313,16 @@ export default function RouteComponent() {
                 }
                 if (isTarget(upper, new_labels, data.width, data.height) &&
                     IsShift) {
-                        const target = { x: upper.x, y: upper.y + 1, hide: upper.hide };
-                        if (upper.y == 0 
-                            || isWall(target, new_labels, data.width, data.height)
-                            || isBox(target, new_labels, data.width, data.height)
-                            || isTarget(target, new_labels, data.width, data.height)) {
-                            return;
-                        }
-                        
-                        const new_data = moveDownSymbol(target, upper, "t", new_labels);
-                        new_labels = new_data.labels;
+                    const target = { x: upper.x, y: upper.y + 1, hide: upper.hide };
+                    if (upper.y == data.height - 1
+                        || isWall(target, new_labels, data.width, data.height)
+                        || isBox(target, new_labels, data.width, data.height)
+                        || isTarget(target, new_labels, data.width, data.height)) {
+                        return;
+                    }
+
+                    const new_data = moveDownSymbol(target, upper, "t", new_labels);
+                    new_labels = new_data.labels;
                 }
 
 
@@ -351,6 +351,19 @@ export default function RouteComponent() {
                     const new_box = setBox(upper, new_data.new_coord);
                     setBoxCoord(new_box);
                 }
+                if (isTarget(upper, new_labels, data.width, data.height) &&
+                    IsShift) {
+                    const target = { x: upper.x - 1, y: upper.y, hide: upper.hide };
+                    if (upper.y == 0
+                        || isWall(target, new_labels, data.width, data.height)
+                        || isBox(target, new_labels, data.width, data.height)
+                        || isTarget(target, new_labels, data.width, data.height)) {
+                        return;
+                    }
+
+                    const new_data = moveDownSymbol(target, upper, "t", new_labels);
+                    new_labels = new_data.labels;
+                }
                 const new_data = moveLeftSymbol(upper, playerCoord, "p", new_labels);
                 new_labels = new_data.labels;
                 const new_player = new_data.new_coord;
@@ -358,6 +371,7 @@ export default function RouteComponent() {
                 setButtonLabels(new_labels);
                 setPlayerCoord(new_player);
             }
+
         }
         isFinish();
     }
