@@ -75,6 +75,10 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
+    const data = request.formData();
+    const finish = (await data).get("finish");
+    if (finish == "1")
+        return redirect("/game_dashboard");
     return null;
 };
 
