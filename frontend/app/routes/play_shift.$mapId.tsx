@@ -55,7 +55,7 @@ function findCoordinates(content: string, pattern: string, width: number, height
 }
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const Name = "teszt";
-    const Content = "ttpwwtssbtssstts";
+    const Content = "sptssstbssttsstw";
     const width = 4;
     const height = 4;
 
@@ -394,6 +394,20 @@ export default function RouteComponent() {
                     const new_box = setBox(upper, new_data.new_coord);
                     setBoxCoord(new_box);
                 }
+                if (isTarget(upper, new_labels, data.width, data.height) &&
+                    IsShift) {
+                    const target = { x: upper.x + 1, y: upper.y, hide: upper.hide };
+                    if (upper.x == data.width - 1
+                        || isWall(target, new_labels, data.width, data.height)
+                        || isBox(target, new_labels, data.width, data.height)
+                        || isTarget(target, new_labels, data.width, data.height)) {
+                        return;
+                    }
+
+                    const new_data = moveRightSymbol(target, upper, "t", new_labels);
+                    new_labels = new_data.labels;
+                }
+
                 const new_data = moveRightSymbol(upper, playerCoord, "p", new_labels);
                 new_labels = new_data.labels;
                 const new_player = new_data.new_coord;
