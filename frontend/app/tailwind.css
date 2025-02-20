@@ -36,7 +36,7 @@ nav {
 .login-window,
 .register-window,
 .dimensions-window {
-  @apply bg-gray-400 p-4 w-2/5 h-3/5 rounded shadow-md;
+  @apply bg-gray-400 p-4 w-2/5 h-4/5 rounded shadow-md;
 }
 
 .login_form ,

@@ -17,8 +17,9 @@ export default function RouteComponent() {
                 <div className="dimensions-window">
                     <h3>Dimensions</h3>
                     <form className="dimensions_form" method="post">
-                        <input className="text-field-style" type="text" name="width"></input>
-                        <input className="text-field-style" type="text" name="height"></input>
+                        <label>width</label><input className="text-field-style" type="text"></input>
+                        <p>height</p><input className="text-field-style" type="text" name="height"></input>
+                        <p>name</p><input className="text-field-style" type="text" name="name"></input>
                         <button className="button-style" type="submit">OK</button>
                     </form>
                 </div>
