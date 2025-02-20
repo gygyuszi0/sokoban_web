@@ -141,7 +141,20 @@ export default function RouteComponent() {
 
     const [playerCoord, setPlayerCoord] = useState(data.startCoordinate);
     const [BoxCoord, setBoxCoord] = useState(data.box);
-    const [MessageState, setMessageState] = useState("message");
+    const [MessageState, setMessageState] = useState("");
+    const [FinshState, setFinshState] = useState(false);
+
+    function isFinish(props) {
+        let result = true;
+        for (let index = 0; index < BoxCoord.length; index++) {
+            const hidden = BoxCoord[index].hide;
+            result = (hidden == "t") && result;
+        }
+        if (result) {
+            setFinshState(result);
+            setMessageState("Finish");
+        }
+    }
 
     function moveUpSymbol(upper: coordinate, current: coordinate, symbol: string, content: string[]) {
         const index = toIndex(upper, data.width, data.height);
