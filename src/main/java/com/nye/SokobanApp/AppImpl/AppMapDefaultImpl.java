@@ -45,6 +45,8 @@ public class AppMapDefaultImpl implements AppMapInterface {
     public ReadMapResponse readMap(ReadMapRequest map) {
         MapEntity entity = mapStorage.findById(map.getId()).orElseThrow();
         ReadMapResponse response = ReadMapResponse.builder()
+                .id(entity.getId())
+                .mapName(entity.getMapName())
                 .mapContent(entity.getMapContent())
                 .build();
         return response;
