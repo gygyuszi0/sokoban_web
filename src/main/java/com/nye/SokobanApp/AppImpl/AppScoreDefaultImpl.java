@@ -1,5 +1,10 @@
 package com.nye.SokobanApp.AppImpl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest.AppCreateScoreRequest;
 import com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest.AppReadScoreRequest;
 import com.nye.SokobanApp.AppDto.AppRequest.AppScoreRequest.AppScoreDeleteRequest;
@@ -11,11 +16,8 @@ import com.nye.SokobanApp.AppInterface.AppScoreInterface;
 import com.nye.storage.entity.ScoreEntity;
 import com.nye.storage.entity.ScoreId;
 import com.nye.storage.service.ScoreStorage;
-import lombok.AllArgsConstructor;
+
 import lombok.NoArgsConstructor;
-import org.h2.mvstore.FreeSpaceBitSet;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 @NoArgsConstructor
@@ -77,6 +79,21 @@ public class AppScoreDefaultImpl implements AppScoreInterface {
                 .userId(result.getUserId())
                 .build();
         return  response;
+    }
+
+    @Override
+    public List<AppReadScoreResponse> readAll() {
+        
+        List<ScoreEntity> result = (List<ScoreEntity>) scoreStorage.findAll();
+        if (!result.isEmpty()) {
+            return result.stream().map(score -> AppReadScoreResponse.builder()
+                .mapId(score.getMapId())
+                .userId(score.getUserId())
+                .time(score.getScore())
+                .build()
+            ).toList();
+        }
+        return List.of();
     }
     
 }

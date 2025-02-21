@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ReadMapResponse {
-    private Integer startCoordinateX;
-    private Integer startCoordinateY;
+    private Long id;
+    private String mapName;
     private String mapContent;
 }
