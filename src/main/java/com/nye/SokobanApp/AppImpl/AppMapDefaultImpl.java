@@ -23,14 +23,9 @@ public class AppMapDefaultImpl implements AppMapInterface {
 
     @Override
     public CreateMapResponse createMap(CreateMapRequest map) {
-        CoordinateEntity coordinate = CoordinateEntity.builder()
-                .x(map.getStartCoordinate().getX())
-                .y(map.getStartCoordinate().getY())
-                .build();
         MapEntity request = MapEntity.builder()
+                .mapName(map.getMapName())
                 .mapContent(map.getMapContent())
-                .startCoordinateX(coordinate.getX())
-                .startCoordinateY(coordinate.getY())
                 .build();
         MapEntity response = mapStorage.save(request);
         CreateMapResponse result = CreateMapResponse.builder().
@@ -51,8 +46,6 @@ public class AppMapDefaultImpl implements AppMapInterface {
         MapEntity entity = mapStorage.findById(map.getId()).orElseThrow();
         ReadMapResponse response = ReadMapResponse.builder()
                 .mapContent(entity.getMapContent())
-                .startCoordinateX(entity.getStartCoordinateX())
-                .startCoordinateY(entity.getStartCoordinateY())
                 .build();
         return response;
     }
@@ -62,8 +55,6 @@ public class AppMapDefaultImpl implements AppMapInterface {
         MapEntity entity = MapEntity.builder()
                 .id(map.getId())
                 .mapContent(map.getMapContent())
-                .startCoordinateX(map.getStartCoordinateX())
-                .startCoordinateY(map.getStartCoordinateY())
                 .build();
         mapStorage.deleteById(map.getId());
         entity = mapStorage.save(entity);
