@@ -1,8 +1,11 @@
 package com.nye.SokobanApp.AppImpl;
 
+import java.util.List;
+
 import com.nye.storage.entity.CoordinateEntity;
 import com.nye.storage.entity.MapEntity;
 import com.nye.storage.service.MapStorage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,5 +68,20 @@ public class AppMapDefaultImpl implements AppMapInterface {
                 .build();
         return response;
     }
-    
+
+    @Override
+    public List<ReadMapResponse> readAllMap() {
+        List<MapEntity> result = (List<MapEntity>) mapStorage.findAll();
+        if (!result.isEmpty()) {
+            return result.stream().map(currentMap -> ReadMapResponse.builder()
+                    .id(currentMap.getId())
+                    .mapName(currentMap.getMapName())
+                    .mapContent(currentMap.getMapContent())
+                    .build()
+            ).toList();
+        }
+
+        return List.of();
+    }
+
 }
