@@ -7,7 +7,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();
     const width = formData.get("width");
     const height = formData.get("height");
-    return redirect(`/create_map/${width}/${height}`);
+    const name = formData.get("name");
+    return redirect(`/create_map/${width}/${height}/${name}`);
 };
 
 export default function RouteComponent() {
@@ -17,7 +18,7 @@ export default function RouteComponent() {
                 <div className="dimensions-window">
                     <h3>Dimensions</h3>
                     <form className="dimensions_form" method="post">
-                        <label>width</label><input className="text-field-style" type="text"></input>
+                        <label>width</label><input className="text-field-style" type="text" name="width"></input>
                         <p>height</p><input className="text-field-style" type="text" name="height"></input>
                         <p>name</p><input className="text-field-style" type="text" name="name"></input>
                         <button className="button-style" type="submit">OK</button>
