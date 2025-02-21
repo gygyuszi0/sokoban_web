@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UpdateMapRequest  {
     private Long id;
-    private Integer startCoordinateX;
-    private Integer startCoordinateY;
+    private String mapName;
     private String mapContent;
 }
