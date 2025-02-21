@@ -71,8 +71,17 @@ public class AppMapDefaultImpl implements AppMapInterface {
 
     @Override
     public List<ReadMapResponse> readAllMap() {
+        List<MapEntity> result = (List<MapEntity>) mapStorage.findAll();
+        if (!result.isEmpty()) {
+            return result.stream().map(currentMap -> ReadMapResponse.builder()
+                    .id(currentMap.getId())
+                    .mapName(currentMap.getMapName())
+                    .mapContent(currentMap.getMapContent())
+                    .build()
+            ).toList();
+        }
 
-        throw new UnsupportedOperationException("Not supported yet.");
+        return List.of();
     }
-    
+
 }
