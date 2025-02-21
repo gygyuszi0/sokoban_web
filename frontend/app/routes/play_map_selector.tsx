@@ -2,6 +2,24 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { useLoaderData, isRouteErrorResponse, useRouteError, Link } from "@remix-run/react";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
+
+    fetch('http://localhost:8888/map/read_all', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            mapName: name,
+            mapContent: map
+        })
+      }).catch(error => {
+        console.log(error);
+      });
+
+
+
+
     const mapList = [];
     for (let index = 0; index < 10; index++) {
 
