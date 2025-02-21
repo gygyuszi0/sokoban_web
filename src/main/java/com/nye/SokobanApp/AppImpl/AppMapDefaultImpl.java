@@ -1,8 +1,11 @@
 package com.nye.SokobanApp.AppImpl;
 
+import java.util.List;
+
 import com.nye.storage.entity.CoordinateEntity;
 import com.nye.storage.entity.MapEntity;
 import com.nye.storage.service.MapStorage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +67,12 @@ public class AppMapDefaultImpl implements AppMapInterface {
                 .id(entity.getId())
                 .build();
         return response;
+    }
+
+    @Override
+    public List<ReadMapResponse> readAllMap() {
+
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }
