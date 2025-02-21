@@ -54,9 +54,9 @@ public class AppMapDefaultImpl implements AppMapInterface {
     public UpdateMapResponse updateMap(UpdateMapRequest map) {
         MapEntity entity = MapEntity.builder()
                 .id(map.getId())
+                .mapName(map.getMapName())
                 .mapContent(map.getMapContent())
                 .build();
-        mapStorage.deleteById(map.getId());
         entity = mapStorage.save(entity);
         UpdateMapResponse response = UpdateMapResponse.builder()
                 .id(entity.getId())
