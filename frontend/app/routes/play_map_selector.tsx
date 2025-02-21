@@ -1,35 +1,50 @@
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
-import { useLoaderData, isRouteErrorResponse, useRouteError, Link } from "@remix-run/react";
+import { useLoaderData, isRouteErrorResponse, useRouteError, Link, json } from "@remix-run/react";
+import { date } from "zod";
+
+interface MapModel {
+    id : number;
+    name : string;
+    content : string;
+};
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 
-    fetch('http://localhost:8888/map/read_all', {
-        method: 'POST',
+    let data : Array<MapModel> = [];
+
+    const result = fetch('http://localhost:8888/map/read_all', {
+        method: 'GET',
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            mapName: name,
-            mapContent: map
-        })
-      }).catch(error => {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(result => {
+        result.json()
+            .then(jsonData => {
+                data = jsonData;
+                console.log(data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    })
+    .catch(error => {
         console.log(error);
-      });
+    });
 
+    return data;
 
+    // const mapList = [];
+    // for (let index = 0; index < 10; index++) {
 
+    //     mapList.push({
+    //         mapId: index,
+    //         mapName: ("teszt" + index)
+    //     });
 
-    const mapList = [];
-    for (let index = 0; index < 10; index++) {
-
-        mapList.push({
-            mapId: index,
-            mapName: ("teszt" + index)
-        });
-
-    }
-    return mapList;
+    // }
+    // return mapList;
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
