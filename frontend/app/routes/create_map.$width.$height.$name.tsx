@@ -14,10 +14,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
     const width = parseInt(data.get("width"));
     const height = parseInt(data.get("height"));
-    const player_index = map_array.indexOf("p");
-
-    const player_x = Math.floor(player_index/height);
-    const player_y = player_index % width;
+    const name = data.get("name");
 
     let map = String();
     for (let index = 0; index < map_array.length; index++) {
@@ -31,10 +28,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            startCoordinate: {
-                x : player_x,
-                y : player_y
-            },
+            mapName: name,
             mapContent: map
         })
       }).catch(error => {
@@ -66,6 +60,7 @@ export default function RouteComponent() {
     const params = useParams();
     const width = parseInt(params.width);
     const height = parseInt(params.height);
+    const name = params.name;
 
     const [selected, setSelected] = useState("s");
     const [buttonLabels, setButtonLabels] = useState([...Array(width * height).keys()].map(i => "s"));
@@ -127,6 +122,7 @@ export default function RouteComponent() {
                     <form method="post">
                         <input type="hidden" name="width" value={width} />
                         <input type="hidden" name="height" value={height} />
+                        <input type="hidden" name="name" value={name} />
                         <input type="hidden" name="map" value={JSON.stringify(buttonLabels)} />
                         <button className="map-button" type="submit">OK</button>
                     </form>
