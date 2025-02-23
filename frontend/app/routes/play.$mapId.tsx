@@ -49,6 +49,20 @@ function findCoordinates(content: string, pattern: string, width: number, height
     return coordinates
 }
 export const loader = async ({ request }: LoaderFunctionArgs) => {
+
+    const params = useParams();
+    const url = 'http://localhost:8888/map/read/' + params.mapId;
+    const result = fetch(url, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
+
     const Name = "teszt";
     const Content = "sbtsspsssbsswstw";
     const width = 4;
