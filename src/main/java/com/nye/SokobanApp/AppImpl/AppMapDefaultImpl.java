@@ -29,6 +29,8 @@ public class AppMapDefaultImpl implements AppMapInterface {
         MapEntity request = MapEntity.builder()
                 .mapName(map.getMapName())
                 .mapContent(map.getMapContent())
+                .widht(map.getWidth())
+                .height(map.getHeight())
                 .build();
         MapEntity response = mapStorage.save(request);
         CreateMapResponse result = CreateMapResponse.builder().
