@@ -53,6 +53,8 @@ public class AppMapDefaultImpl implements AppMapInterface {
                 .id(entity.getId())
                 .mapName(entity.getMapName())
                 .mapContent(entity.getMapContent())
+                .width(entity.getWidht())
+                .height(entity.getHeight())
                 .build();
         return response;
     }

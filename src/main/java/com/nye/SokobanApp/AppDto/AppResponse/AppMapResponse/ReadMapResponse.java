@@ -13,4 +13,6 @@ public class ReadMapResponse {
     private Long id;
     private String mapName;
     private String mapContent;
+    private Integer width;
+    private Integer height;
 }
