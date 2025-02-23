@@ -10,8 +10,6 @@ interface MapModel {
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 
-    let data : Array<MapModel> = [];
-
     const result = fetch('http://localhost:8888/map/read_all', {
         method: 'GET',
         headers: {
@@ -19,32 +17,11 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
             'Content-Type': 'application/json',
         }
     })
-    .then(result => {
-        result.json()
-            .then(jsonData => {
-                data = jsonData;
-                console.log(data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    })
     .catch(error => {
         console.log(error);
     });
 
-    return data;
-
-    // const mapList = [];
-    // for (let index = 0; index < 10; index++) {
-
-    //     mapList.push({
-    //         mapId: index,
-    //         mapName: ("teszt" + index)
-    //     });
-
-    // }
-    // return mapList;
+    return result;
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -52,7 +29,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 export default function RouteComponent() {
-    const data = useLoaderData<typeof loader>()
+    const data = useLoaderData<typeof loader>();
 
     function MapItem(props) {
         const target = "./play/" + props.mapId;
@@ -66,6 +43,7 @@ export default function RouteComponent() {
     return (
         <>
             <h1 className="sub-title">Select map</h1>
+            <p>Map = {data.length}</p>
             <div className="map-page">
                 <div className="map-list">
                     <div className="map-header">
@@ -73,7 +51,7 @@ export default function RouteComponent() {
                         <div className="header-item">Name</div>
                     </div>
                     {data.map((item) => (
-                        <MapItem mapId={item?.mapId} mapName={item?.mapName} />
+                        <MapItem mapId={item?.id} mapName={item?.mapName} />
                     ))}
 
                 </div>
