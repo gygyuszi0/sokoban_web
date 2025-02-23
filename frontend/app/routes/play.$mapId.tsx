@@ -48,9 +48,9 @@ function findCoordinates(content: string, pattern: string, width: number, height
     console.log("box_coordinates :", coordinates);
     return coordinates
 }
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 
-    const params = useParams();
+    // const params = useParams();
     const url = 'http://localhost:8888/map/read/' + params.mapId;
     const result = fetch(url, {
         method: 'GET',
@@ -85,7 +85,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
         target: targetCoordinates
     };
 
-    return response;
+    return {old : response, new : result};
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -97,7 +97,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 export default function RouteComponent() {
-    const data = useLoaderData<typeof loader>()
+    const loader_data = useLoaderData<typeof loader>();
+    const data = loader_data.old;
+    const data_new = loader_data.new;
     const params = useParams();
     const content = data?.mapContent;
 

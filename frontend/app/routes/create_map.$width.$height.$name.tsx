@@ -29,7 +29,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         },
         body: JSON.stringify({
             mapName: name,
-            mapContent: map
+            mapContent: map,
+            width : width,
+            height : height
         })
       }).catch(error => {
         console.log(error);
