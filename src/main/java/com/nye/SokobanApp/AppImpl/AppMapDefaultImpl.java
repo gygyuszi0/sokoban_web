@@ -29,6 +29,8 @@ public class AppMapDefaultImpl implements AppMapInterface {
         MapEntity request = MapEntity.builder()
                 .mapName(map.getMapName())
                 .mapContent(map.getMapContent())
+                .widht(map.getWidth())
+                .height(map.getHeight())
                 .build();
         MapEntity response = mapStorage.save(request);
         CreateMapResponse result = CreateMapResponse.builder().
@@ -51,6 +53,8 @@ public class AppMapDefaultImpl implements AppMapInterface {
                 .id(entity.getId())
                 .mapName(entity.getMapName())
                 .mapContent(entity.getMapContent())
+                .width(entity.getWidht())
+                .height(entity.getHeight())
                 .build();
         return response;
     }
@@ -61,6 +65,8 @@ public class AppMapDefaultImpl implements AppMapInterface {
                 .id(map.getId())
                 .mapName(map.getMapName())
                 .mapContent(map.getMapContent())
+                .widht(map.getWidth())
+                .height(map.getHeight())
                 .build();
         entity = mapStorage.save(entity);
         UpdateMapResponse response = UpdateMapResponse.builder()
@@ -77,6 +83,8 @@ public class AppMapDefaultImpl implements AppMapInterface {
                     .id(currentMap.getId())
                     .mapName(currentMap.getMapName())
                     .mapContent(currentMap.getMapContent())
+                    .width(currentMap.getWidht())
+                    .height(currentMap.getHeight())
                     .build()
             ).toList();
         }

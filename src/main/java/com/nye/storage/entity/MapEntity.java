@@ -36,4 +36,9 @@ public class MapEntity {
     @NotNull
     private String mapName;
 
+    @NotNull
+    private Integer widht;
+    
+    @NotNull
+    private Integer height;
 }
