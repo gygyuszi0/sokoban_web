@@ -15,4 +15,6 @@ import lombok.NoArgsConstructor;
 public class CreateMapRequest {
     private String mapName;
     private String mapContent;
+    private Integer width;
+    private Integer height;
 }
