@@ -2,7 +2,19 @@ import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData, isRouteErrorResponse, useRouteError } from "@remix-run/react";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  return null;
+
+    const result = fetch('http://localhost:8888/score/read_all', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
+
+    return result;
 };
 
 export default function RouteComponent() {
