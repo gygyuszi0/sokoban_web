@@ -3,7 +3,7 @@ import { useLoaderData, isRouteErrorResponse, useRouteError } from "@remix-run/r
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 
-    const result = fetch('http://localhost:8888/score/read_all', {
+    const result = await fetch('http://localhost:8888/score/read_all', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -14,7 +14,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
         console.log(error);
     });
 
-    return result;
+    return await result.json();
 };
 
 export default function RouteComponent() {
@@ -25,7 +25,7 @@ export default function RouteComponent() {
         <div className="score-item">
             <div className="score-item-field">{props.mapId}</div>
             <div className="score-item-field">{props.userId}</div>
-            <div className="score-item-field">{props.score}</div>
+            <div className="score-item-field">{props.score / 1000}'s</div>
         </div>
     );
   };
@@ -39,33 +39,11 @@ export default function RouteComponent() {
             <div className="header-item">User id</div>
             <div className="header-item">Score</div>
           </div>
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
-          <ScoreItem mapId={1} userId={1} score={100} />
+            {
+                data.map((item) => (
+                    <ScoreItem mapId={item.mapId} userId={item.userId} score={item.time} />
+                ))
+            }
         </div>
       </div>
     </>
