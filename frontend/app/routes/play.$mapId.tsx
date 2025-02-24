@@ -2,6 +2,7 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { useLoaderData, isRouteErrorResponse, useRouteError, useParams, redirect, Scripts } from "@remix-run/react";
 import { console } from "node:inspector";
 import React, { useState } from "react";
+import { json } from "@remix-run/node"; 
 
 interface coordinate {
     x: number,
@@ -51,7 +52,7 @@ function findCoordinates(content: string[], pattern: string, width: number, heig
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 
     const url = 'http://localhost:8888/map/read/' + params.mapId;
-    const result = fetch(url, {
+    const result = await fetch(url, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -61,8 +62,30 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     .catch(error => {
         console.log(error);
     });
+    const data = await result.json();
 
-    return result;
+    const Name = data.mapName;
+    const Content = data.mapContent;
+    const width = data.width;
+    const height = data.height;
+
+    const playerCoordinate = toCoordinate(Content.indexOf("p"), width, height);
+    const boxCoordinates = findCoordinates([...Content], "b", width, height);
+    const targetCoordinates = findCoordinates([...Content], "t", width, height);
+
+    const response = {
+        mapName: Name,
+        mapContent: Content,
+        width: width,
+        height: height,
+        startCoordinate: playerCoordinate,
+        box: boxCoordinates,
+        target: targetCoordinates
+    };
+
+    
+
+    return response;
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -76,9 +99,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 export default function RouteComponent() {
     const params = useParams();
     const data = useLoaderData<typeof loader>();
-    const [buttonLabels, setButtonLabels] = useState([...data?.mapContent]);
-    const [playerCoord, setPlayerCoord] = useState(toCoordinate(buttonLabels.indexOf("p"), data?.width, data?.height));
-    const [BoxCoord, setBoxCoord] = useState(findCoordinates(buttonLabels, "b", data?.width, data?.height));
+    const [buttonLabels, setButtonLabels] = useState(data?.mapContent);
+    const [playerCoord, setPlayerCoord] = useState(data?.startCoordinate);
+    const [BoxCoord, setBoxCoord] = useState(data.box);
     const [MessageState, setMessageState] = useState("");
     const [FinshState, setFinshState] = useState(false);
 
