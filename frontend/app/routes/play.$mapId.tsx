@@ -33,7 +33,7 @@ function isBox(coord: coordinate, content: string[], width: number, height: numb
 }
 
 
-function findCoordinates(content: string, pattern: string, width: number, height: number) {
+function findCoordinates(content: string[], pattern: string, width: number, height: number) {
     const coordinates = [];
     for (let index = 0; index < content.length && index != -1; index++) {
         const i = content.indexOf(pattern, index);
@@ -78,7 +78,7 @@ export default function RouteComponent() {
     const data = useLoaderData<typeof loader>();
     const [buttonLabels, setButtonLabels] = useState([...data?.mapContent]);
     const [playerCoord, setPlayerCoord] = useState(toCoordinate(buttonLabels.indexOf("p"), data?.width, data?.height));
-    // const [BoxCoord, setBoxCoord] = useState(data.box);
+    const [BoxCoord, setBoxCoord] = useState(findCoordinates(buttonLabels, "b", data?.width, data?.height));
     // const [MessageState, setMessageState] = useState("");
     // const [FinshState, setFinshState] = useState(false);
 
@@ -348,8 +348,8 @@ export default function RouteComponent() {
             <p>buttons : {JSON.stringify(buttonLabels)}</p>
 
             <p>player : {JSON.stringify(playerCoord)}</p>
-            {/* <p>box : {JSON.stringify(BoxCoord)}</p>
-            <p>data : {JSON.stringify(data_new)}</p>
+            <p>box : {JSON.stringify(BoxCoord)}</p>
+            {/* <p>data : {JSON.stringify(data_new)}</p>
             <Message msg={MessageState}></Message>*/}
 
             <div className="map-page">
