@@ -91,6 +91,22 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 export const action = async ({ request }: ActionFunctionArgs) => {
     const data = request.formData();
     const finish = (await data).get("finish");
+    const mapId = (await data).get("mapId");
+
+    const result = await fetch("http://localhost:8888/score/create", {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            mapId : 0,
+            userId : 0,
+            time : 0
+        })
+    })
+    
+
     if (finish == "1")
         return redirect("/game_dashboard");
     return null;
@@ -152,6 +168,7 @@ export default function RouteComponent() {
             <>
                 <form className="message-container" method="post">
                     <input type="hidden" name="finish" value={toInt(FinshState)}></input>
+                    <input type="hidden" name="mapId" value={props.mapId}></input>
                     <p className="message-text">{props.msg}</p>
                     <button className="message-button" type="submit">OK</button>
                 </form>
