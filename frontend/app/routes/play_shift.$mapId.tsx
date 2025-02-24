@@ -85,7 +85,8 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
         height: height,
         startCoordinate: playerCoordinate,
         box: boxCoordinates,
-        target: targetCoordinates
+        target: targetCoordinates,
+        startTime : Date.now()
     };
 
     
@@ -96,6 +97,23 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 export const action = async ({ request }: ActionFunctionArgs) => {
     const data = request.formData();
     const finish = (await data).get("finish");
+    const mapId = (await data).get("mapId");
+    const startDate = (await data).get("startDate");
+
+    const result = await fetch("http://localhost:8888/score/create", {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            mapId : mapId,
+            userId : 0,
+            time : Date.now() - startDate
+        })
+    })
+    
+
     if (finish == "1")
         return redirect("/game_dashboard");
     return null;
@@ -109,6 +127,7 @@ export default function RouteComponent() {
     const [buttonLabels, setButtonLabels] = useState([...data?.mapContent]);
     const [IsShift, setIsShift] = useState(false);
     const [MessageState, setMessageState] = useState("");
+    const [StartDate, setStartDate] = useState(data.startTime);
 
     function handleShift() {
         if (IsShift) {
@@ -166,6 +185,8 @@ export default function RouteComponent() {
             <>
                 <form className="message-container" method="post">
                     <input type="hidden" name="finish" value={toInt(FinshState)}></input>
+                    <input type="hidden" name="mapId" value={params.mapId}></input>
+                    <input type="hidden" name="startDate" value={StartDate}></input>
                     <p className="message-text">{props.msg}</p>
                     <button className="message-button" type="submit">OK</button>
                 </form>
