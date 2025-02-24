@@ -74,48 +74,48 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 export default function RouteComponent() {
-    const loader_data = useLoaderData<typeof loader>();
+    const data = useLoaderData<typeof loader>();
+    const [buttonLabels, setButtonLabels] = useState([...data?.mapContent]);
     // const data = loader_data.old;
     // const data_new = loader_data.new;
     const params = useParams();
     // const content = data?.mapContent;
 
-    // const [buttonLabels, setButtonLabels] = useState([...data?.mapContent]);
 
-    // function MapItem(props) {
-    //     const name = "item_" + props.index;
-    //     const index = props.index;
-    //     const label = buttonLabels[index];
-    //     return (
-    //         <button className="map-grid-item" name={name}>{label}</button>
-    //     );
-    // }
+    function MapItem(props) {
+        const name = "item_" + props.index;
+        const index = props.index;
+        const label = buttonLabels[index];
+        return (
+            <button className="map-grid-item" name={name}>{label}</button>
+        );
+    }
 
-    // function MapRow({ children }: { children: React.ReactNode }) {
-    //     return (
-    //         <div className="map-grid-line">
-    //             {children}
-    //         </div>
-    //     );
-    // }
+    function MapRow({ children }: { children: React.ReactNode }) {
+        return (
+            <div className="map-grid-line">
+                {children}
+            </div>
+        );
+    }
 
-    // const MapGrid = (props) => {
+    const MapGrid = (props) => {
 
-    //     let rows = [];
-    //     for (let i = 0; i < props.height; i++) {
-    //         let row = [];
-    //         for (let j = 0; j < props.width; j++) {
-    //             row.push(<MapItem index={i * props.width + j} />);
-    //         }
-    //         rows.push(<MapRow>{row}</MapRow>);
-    //     }
+        let rows = [];
+        for (let i = 0; i < props.height; i++) {
+            let row = [];
+            for (let j = 0; j < props.width; j++) {
+                row.push(<MapItem index={i * props.width + j} />);
+            }
+            rows.push(<MapRow>{row}</MapRow>);
+        }
 
-    //     return (
-    //         <>
-    //             {rows}
-    //         </>
-    //     );
-    // }
+        return (
+            <>
+                {rows}
+            </>
+        );
+    }
 
     // function toInt(param : boolean){
     //     if (param) {
@@ -347,18 +347,19 @@ export default function RouteComponent() {
             <Scripts></Scripts>
             <h1 className="sub-title">Play</h1>
             <p>Map id : {params.mapId}</p>
-            <p>loader : {JSON.stringify(loader_data)}</p>
+            <p>loader : {JSON.stringify(data)}</p>
+            <p>loader : {JSON.stringify(buttonLabels)}</p>
             {/* <p>player : {JSON.stringify(playerCoord)}</p>
             <p>box : {JSON.stringify(BoxCoord)}</p>
             <p>data : {JSON.stringify(data_new)}</p>
-            <Message msg={MessageState}></Message>
+            <Message msg={MessageState}></Message>*/}
 
             <div className="map-page">
                 <div className="map-grid">
                     <MapGrid width={data?.width} height={data?.height}></MapGrid>
                 </div>
             </div>
-            <div className="play-navigation-container">
+            {/*<div className="play-navigation-container">
                 <div className="play-navigation">
                     <button className="play-navigation-button-hidden" disabled={true}></button>
                     <button className="play-navigation-button" onClick={() => (moveUp())}>{String.fromCodePoint(0x2B06)}</button>
