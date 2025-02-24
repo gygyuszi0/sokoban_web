@@ -1,19 +1,20 @@
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { useLoaderData, isRouteErrorResponse, useRouteError, Link } from "@remix-run/react";
-
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-    const mapList = [];
-    for (let index = 0; index < 10; index++) {
 
-        mapList.push({
-            mapId: index,
-            mapName: ("teszt" + index)
-        });
+    const result = fetch('http://localhost:8888/map/read_all', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
-    }
-    return mapList;
+    return result;
 };
-
 export const action = async ({ request }: ActionFunctionArgs) => {
     return null;
 };
@@ -40,7 +41,7 @@ export default function RouteComponent() {
                         <div className="header-item">Name</div>
                     </div>
                     {data.map((item) => (
-                        <MapItem mapId={item?.mapId} mapName={item?.mapName} />
+                        <MapItem mapId={item?.id} mapName={item?.mapName} />
                     ))}
 
                 </div>
