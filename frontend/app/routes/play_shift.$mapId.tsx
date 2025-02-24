@@ -2,6 +2,7 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { useLoaderData, isRouteErrorResponse, useRouteError, useParams, redirect, Scripts } from "@remix-run/react";
 import { console } from "node:inspector";
 import React, { useState } from "react";
+import { toCoordinate, findCoordinates } from "./play.$mapId";
 
 interface coordinate {
     x: number,
@@ -53,18 +54,29 @@ function findCoordinates(content: string, pattern: string, width: number, height
     console.log("box_coordinates :", coordinates);
     return coordinates
 }
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-    const Name = "teszt";
-    const Content = "sptssstbssttsstw";
-    const width = 4;
-    const height = 4;
+export const loader = async ({ request, params }: LoaderFunctionArgs) => {
+
+    const url = 'http://localhost:8888/map/read/' + params.mapId;
+    const result = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
+    const data = await result.json();
+
+    const Name = data.mapName;
+    const Content = data.mapContent;
+    const width = data.width;
+    const height = data.height;
 
     const playerCoordinate = toCoordinate(Content.indexOf("p"), width, height);
-    const boxCoordinates = findCoordinates(Content, "b", width, height);
-    const targetCoordinates = findCoordinates(Content, "t", width, height);
-
-    const startCoordinateX = 2;
-    const startCoordinateY = 1;
+    const boxCoordinates = findCoordinates([...Content], "b", width, height);
+    const targetCoordinates = findCoordinates([...Content], "t", width, height);
 
     const response = {
         mapName: Name,
@@ -75,6 +87,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
         box: boxCoordinates,
         target: targetCoordinates
     };
+
+    
 
     return response;
 };
