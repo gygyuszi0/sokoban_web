@@ -2,7 +2,6 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { useLoaderData, isRouteErrorResponse, useRouteError, useParams, redirect, Scripts } from "@remix-run/react";
 import { console } from "node:inspector";
 import React, { useState } from "react";
-import { json } from "@remix-run/node"; 
 
 interface coordinate {
     x: number,
@@ -80,7 +79,8 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
         height: height,
         startCoordinate: playerCoordinate,
         box: boxCoordinates,
-        target: targetCoordinates
+        target: targetCoordinates,
+        startTime : Date.now()
     };
 
     
@@ -92,6 +92,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const data = request.formData();
     const finish = (await data).get("finish");
     const mapId = (await data).get("mapId");
+    const startDate = (await data).get("startDate");
 
     const result = await fetch("http://localhost:8888/score/create", {
         method: 'POST',
@@ -100,9 +101,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            mapId : 0,
+            mapId : mapId,
             userId : 0,
-            time : 0
+            time : Date.now() - startDate
         })
     })
     
@@ -120,6 +121,7 @@ export default function RouteComponent() {
     const [BoxCoord, setBoxCoord] = useState(data.box);
     const [MessageState, setMessageState] = useState("");
     const [FinshState, setFinshState] = useState(false);
+    const [StartDate, setStartDate] = useState(data.startTime);
 
     function MapItem(props) {
         const name = "item_" + props.index;
@@ -168,7 +170,8 @@ export default function RouteComponent() {
             <>
                 <form className="message-container" method="post">
                     <input type="hidden" name="finish" value={toInt(FinshState)}></input>
-                    <input type="hidden" name="mapId" value={props.mapId}></input>
+                    <input type="hidden" name="mapId" value={params.mapId}></input>
+                    <input type="hidden" name="startDate" value={StartDate}></input>
                     <p className="message-text">{props.msg}</p>
                     <button className="message-button" type="submit">OK</button>
                 </form>
@@ -384,11 +387,8 @@ export default function RouteComponent() {
             <Scripts></Scripts>
             <h1 className="sub-title">Play</h1>
             <p>Map id : {params.mapId}</p>
-            <p>loader : {JSON.stringify(data)}</p>
-            <p>buttons : {JSON.stringify(buttonLabels)}</p>
+            <p>Start date : {StartDate}</p>
 
-            <p>player : {JSON.stringify(playerCoord)}</p>
-            <p>box : {JSON.stringify(BoxCoord)}</p>
             <Message msg={MessageState}></Message>
 
             <div className="map-page">
