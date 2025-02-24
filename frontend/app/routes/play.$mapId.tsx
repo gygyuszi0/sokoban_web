@@ -74,13 +74,13 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 export default function RouteComponent() {
+    const params = useParams();
     const data = useLoaderData<typeof loader>();
     const [buttonLabels, setButtonLabels] = useState([...data?.mapContent]);
-    // const data = loader_data.old;
-    // const data_new = loader_data.new;
-    const params = useParams();
-    // const content = data?.mapContent;
-
+    const [playerCoord, setPlayerCoord] = useState(toCoordinate(buttonLabels.indexOf("p"), data?.width, data?.height));
+    // const [BoxCoord, setBoxCoord] = useState(data.box);
+    // const [MessageState, setMessageState] = useState("");
+    // const [FinshState, setFinshState] = useState(false);
 
     function MapItem(props) {
         const name = "item_" + props.index;
@@ -144,10 +144,7 @@ export default function RouteComponent() {
     //     return result;
     // }
 
-    // const [playerCoord, setPlayerCoord] = useState(data.startCoordinate);
-    // const [BoxCoord, setBoxCoord] = useState(data.box);
-    // const [MessageState, setMessageState] = useState("");
-    // const [FinshState, setFinshState] = useState(false);
+
 
     // function isFinish() {
     //     let result = true;
@@ -348,9 +345,10 @@ export default function RouteComponent() {
             <h1 className="sub-title">Play</h1>
             <p>Map id : {params.mapId}</p>
             <p>loader : {JSON.stringify(data)}</p>
-            <p>loader : {JSON.stringify(buttonLabels)}</p>
-            {/* <p>player : {JSON.stringify(playerCoord)}</p>
-            <p>box : {JSON.stringify(BoxCoord)}</p>
+            <p>buttons : {JSON.stringify(buttonLabels)}</p>
+
+            <p>player : {JSON.stringify(playerCoord)}</p>
+            {/* <p>box : {JSON.stringify(BoxCoord)}</p>
             <p>data : {JSON.stringify(data_new)}</p>
             <Message msg={MessageState}></Message>*/}
 
