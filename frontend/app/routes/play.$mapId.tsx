@@ -133,7 +133,12 @@ export default function RouteComponent() {
     function MapItem(props) {
         const name = "item_" + props.index;
         const index = props.index;
-        const label = buttonLabels[index];
+        let label = buttonLabels[index];
+        const coord = toCoordinate(index, data.width, data.height);
+        const box = findBox(coord)
+        if (box.hide == "t"){
+            label = "tb";
+        }
         return (
             <button className="map-grid-item" name={name}>{emojiMap.get(label)}</button>
         );
