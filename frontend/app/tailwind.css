@@ -207,3 +207,10 @@ nav {
         rounded
         shadow-md
 }
+
+.map-info-container {
+    @apply flex flex-row
+        p-2 gap-2
+        bg-gray-100
+        shadow-md
+}
