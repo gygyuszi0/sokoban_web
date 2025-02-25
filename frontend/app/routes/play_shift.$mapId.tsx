@@ -4,6 +4,7 @@ import { console } from "node:inspector";
 import React, { useState } from "react";
 import { toCoordinate, findCoordinates } from "./play.$mapId";
 import MapInfo from "./map_info";
+import { emojiMap } from "./emoji_map";
 
 interface coordinate {
     x: number,
@@ -145,13 +146,18 @@ export default function RouteComponent() {
     }
 
     function MapItem(props) {
-        const name = "item_" + props.index;
-        const index = props.index;
-        const label = buttonLabels[index];
-        return (
-            <button className="map-grid-item" name={name}>{label}</button>
-        );
-    }
+            const name = "item_" + props.index;
+            const index = props.index;
+            let label = buttonLabels[index];
+            const coord = toCoordinate(index, data.width, data.height);
+            const box = findBox(coord)
+            if (box.hide == "t"){
+                label = "tb";
+            }
+            return (
+                <button className="map-grid-item" name={name}>{emojiMap.get(label)}</button>
+            );
+        }
 
     function MapRow({ children }: { children: React.ReactNode }) {
         return (
