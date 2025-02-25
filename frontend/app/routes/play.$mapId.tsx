@@ -3,6 +3,7 @@ import { useLoaderData, isRouteErrorResponse, useRouteError, useParams, redirect
 import { console } from "node:inspector";
 import React, { useState } from "react";
 import MapInfo from "./map_info";
+import { emojiMap } from "./emoji_map";
 
 interface coordinate {
     x: number,
@@ -134,7 +135,7 @@ export default function RouteComponent() {
         const index = props.index;
         const label = buttonLabels[index];
         return (
-            <button className="map-grid-item" name={name}>{label}</button>
+            <button className="map-grid-item" name={name}>{emojiMap.get(label)}</button>
         );
     }
 
