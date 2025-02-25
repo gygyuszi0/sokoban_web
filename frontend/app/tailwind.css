@@ -214,3 +214,7 @@ nav {
         bg-gray-100
         shadow-md
 }
+
+.map-info-label {
+    @apply font-bold text-sm
+}
