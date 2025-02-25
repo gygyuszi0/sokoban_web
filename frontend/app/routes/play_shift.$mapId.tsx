@@ -98,7 +98,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const data = request.formData();
     const finish = (await data).get("finish");
     const mapId = (await data).get("mapId");
-    const startDate = (await data).get("startDate");
+    const StepCount = (await data).get("StepCount");
 
     const result = await fetch("http://localhost:8888/score/create", {
         method: 'POST',
@@ -109,7 +109,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         body: JSON.stringify({
             mapId : mapId,
             userId : 0,
-            time : Date.now() - startDate
+            time : StepCount
         })
     })
     
@@ -191,7 +191,7 @@ export default function RouteComponent() {
                 <form className="message-container" method="post">
                     <input type="hidden" name="finish" value={toInt(FinshState)}></input>
                     <input type="hidden" name="mapId" value={params.mapId}></input>
-                    <input type="hidden" name="startDate" value={StepCount}></input>
+                    <input type="hidden" name="StepCount" value={StepCount}></input>
                     <p className="message-text">{props.msg}</p>
                     <button className="message-button" type="submit">OK</button>
                 </form>
