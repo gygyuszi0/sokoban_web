@@ -2,6 +2,7 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { useLoaderData, isRouteErrorResponse, useRouteError, useParams, redirect, Scripts } from "@remix-run/react";
 import { console } from "node:inspector";
 import React, { useState } from "react";
+import MapInfo from "./map_info";
 
 interface coordinate {
     x: number,
@@ -395,8 +396,7 @@ export default function RouteComponent() {
         <>
             <Scripts></Scripts>
             <h1 className="sub-title">Play</h1>
-            <p>Map id : {params.mapId}</p>
-            <p>StepCount : {StepCount}</p>
+            <MapInfo name={data?.mapName} score={StepCount}></MapInfo>
 
             <Message msg={MessageState}></Message>
 
