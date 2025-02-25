@@ -3,6 +3,7 @@ import { useLoaderData, isRouteErrorResponse, useRouteError, useParams, redirect
 import { console } from "node:inspector";
 import React, { useState } from "react";
 import { toCoordinate, findCoordinates } from "./play.$mapId";
+import MapInfo from "./map_info";
 
 interface coordinate {
     x: number,
@@ -468,10 +469,7 @@ export default function RouteComponent() {
         <>
             <Scripts></Scripts>
             <h1 className="sub-title">Play</h1>
-            <p>Map id : {params.mapId}</p>
-            <p>player : {JSON.stringify(playerCoord)}</p>
-            <p>box : {JSON.stringify(BoxCoord)}</p>
-            <p>shift : {JSON.stringify(IsShift)}</p>
+            <MapInfo name={data?.mapName} score={StepCount}></MapInfo>
             <Message msg={MessageState}></Message>
 
             <div className="map-page">
