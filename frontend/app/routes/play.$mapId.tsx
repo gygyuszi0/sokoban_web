@@ -121,7 +121,6 @@ export default function RouteComponent() {
     const [BoxCoord, setBoxCoord] = useState(data.box);
     const [MessageState, setMessageState] = useState("");
     const [FinshState, setFinshState] = useState(false);
-    // const [StartDate, setStartDate] = useState(data.startTime);
     const [StepCount, setStepCount] = useState(0);
 
     function incrementStep(){
@@ -177,7 +176,7 @@ export default function RouteComponent() {
                 <form className="message-container" method="post">
                     <input type="hidden" name="finish" value={toInt(FinshState)}></input>
                     <input type="hidden" name="mapId" value={params.mapId}></input>
-                    <input type="text" name="StepCount" value={StepCount}></input>
+                    <input type="hidden" name="StepCount" value={StepCount}></input>
                     <p className="message-text">{props.msg}</p>
                     <button className="message-button" type="submit">OK</button>
                 </form>

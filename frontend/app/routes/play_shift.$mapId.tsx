@@ -127,8 +127,13 @@ export default function RouteComponent() {
     const [buttonLabels, setButtonLabels] = useState([...data?.mapContent]);
     const [IsShift, setIsShift] = useState(false);
     const [MessageState, setMessageState] = useState("");
-    const [StartDate, setStartDate] = useState(data.startTime);
+    // const [StepCount, setStartDate] = useState(data.startTime);
+    const [StepCount, setStepCount] = useState(0);
 
+    function incrementStep(){
+        setStepCount(StepCount+1);
+    }
+        
     function handleShift() {
         if (IsShift) {
             setMessageState("Shift on");
@@ -186,7 +191,7 @@ export default function RouteComponent() {
                 <form className="message-container" method="post">
                     <input type="hidden" name="finish" value={toInt(FinshState)}></input>
                     <input type="hidden" name="mapId" value={params.mapId}></input>
-                    <input type="hidden" name="startDate" value={StartDate}></input>
+                    <input type="hidden" name="startDate" value={StepCount}></input>
                     <p className="message-text">{props.msg}</p>
                     <button className="message-button" type="submit">OK</button>
                 </form>
