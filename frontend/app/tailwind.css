@@ -218,3 +218,7 @@ nav {
 .map-info-label {
     @apply font-bold text-sm
 }
+
+.map-info-value {
+    @apply text-sm
+}
