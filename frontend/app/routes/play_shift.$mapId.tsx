@@ -324,6 +324,8 @@ export default function RouteComponent() {
                 const new_data = moveUpSymbol(upper, playerCoord, "p", new_labels);
                 setButtonLabels(new_data.labels);
                 setPlayerCoord(new_data.new_coord);
+                incrementStep();
+                
             }
 
         }
@@ -369,6 +371,7 @@ export default function RouteComponent() {
                 const new_data = moveDownSymbol(upper, playerCoord, "p", new_labels);
                 setButtonLabels(new_data.labels);
                 setPlayerCoord(new_data.new_coord);
+                incrementStep();
             }
         }
         isFinish();
@@ -410,6 +413,7 @@ export default function RouteComponent() {
 
                 setButtonLabels(new_labels);
                 setPlayerCoord(new_player);
+                incrementStep();
             }
 
         }
@@ -454,6 +458,7 @@ export default function RouteComponent() {
 
                 setButtonLabels(new_labels);
                 setPlayerCoord(new_player);
+                incrementStep();
             }
         }
         isFinish();
