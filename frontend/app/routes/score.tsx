@@ -25,7 +25,7 @@ export default function RouteComponent() {
         <div className="score-item">
             <div className="score-item-field">{props.mapId}</div>
             <div className="score-item-field">{props.userId}</div>
-            <div className="score-item-field">{props.score / 1000}'s</div>
+            <div className="score-item-field">{props.score} step</div>
         </div>
     );
   };
