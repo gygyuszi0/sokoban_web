@@ -103,7 +103,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         body: JSON.stringify({
             mapId : mapId,
             userId : 0,
-            time : Date.now() - StepCount
+            time : StepCount
         })
     })
     
