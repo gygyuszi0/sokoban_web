@@ -5,6 +5,7 @@ import type { ClientActionFunctionArgs } from "@remix-run/react";
 import React, { useState } from "react";
 import { Form, useForm } from "react-hook-form";
 import { postRequest } from "~/routes/service/data";
+import { emojiMap } from "./emoji_map";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
     const data = await request.formData();
@@ -68,6 +69,7 @@ export default function RouteComponent() {
     const [buttonLabels, setButtonLabels] = useState([...Array(width * height).keys()].map(i => "s"));
 
     function MapItem(props) {
+        
         const name = "item_" + props.index;
         const index = props.index;
         const label = buttonLabels[index];
@@ -77,7 +79,7 @@ export default function RouteComponent() {
                     let labels = [...buttonLabels];
                     labels[index] = selected;
                     setButtonLabels(labels);
-                }}>{label}</button>
+                }}>{emojiMap.get(label)}</button>
         );
     }
 
