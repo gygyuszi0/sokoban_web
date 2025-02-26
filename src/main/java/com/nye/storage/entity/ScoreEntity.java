@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ScoreEntity {
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private Long id;
