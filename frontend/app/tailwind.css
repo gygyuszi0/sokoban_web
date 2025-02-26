@@ -231,17 +231,17 @@ nav {
 }
 
 .rule-section {
-    @apply bg-green-600 p-4
+    @apply bg-green-600 p-2
         rounded-t
 }
 
 .rule-content {
-    @apply bg-gray-200 p-4
+    @apply bg-gray-200 p-2
         rounded-b
 }
 
-.rule-list {
-    @apply list-disc m-4
+li {
+    @apply list-disc m-8
 }
 
 p {
