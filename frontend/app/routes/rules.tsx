@@ -5,9 +5,10 @@ export default function RouteComponent() {
         <>
             <div className="rule-apge">
                 <details open="true">
-                    <summary>lehetséges lépések</summary>
+                    <summary className="rule-section">lehetséges lépések</summary>
+                    <div className="rule-content">
                     <p>A pályán kezdetben 4 féle szimbólum helyezkedik el</p>
-                    <ul>
+                    <ul className="rule-list">
                         <li>Játékos : {emojiMap.get("p")}</li>
                         <li>Box : {emojiMap.get("b")}</li>
                         <li>Target : {emojiMap.get("t")}</li>
@@ -23,13 +24,17 @@ export default function RouteComponent() {
                     </p>
                     <p>
                         A játék célja, hogy a játékos az összes boxot valamelyik targetra tolja.
+                        <br />
                         Mindegy, hogy melyik box, melyik targetra ér el.
+                        <br />
                         Ha egy box egy targon helyezkdeik el egy zöld négyzet jelzi {emojiMap.get("tb")}.
+                        <br />
                         Ha minden box valamelyik targeton foglal helyet egy üzenet jelzi, hogy a rejtvény megoldva.
                         <br />
                         Az ok gombra kattintva a játék elmenti az eredményt és visszalép a dashboardra.
                     </p>
                     <p>Az eredmények a Scores fül alatt érhetőek el.</p>
+                    </div>
                 </details>
             </div>
         </>
