@@ -114,11 +114,11 @@ export default function RouteComponent() {
 
                 <div className="map-items">
                     <div className="map-items-line">
-                        <button className="map-grid-item" onClick={() => (setSelected("w"))}>w</button>
-                        <button className="map-grid-item" onClick={() => (setSelected("s"))}>s</button>
-                        <button className="map-grid-item" onClick={() => (setSelected("p"))}>p</button>
-                        <button className="map-grid-item" onClick={() => (setSelected("b"))}>b</button>
-                        <button className="map-grid-item" onClick={() => (setSelected("t"))}>t</button>
+                        <button className="map-grid-item" onClick={() => (setSelected("w"))}>{emojiMap.get("w")}</button>
+                        <button className="map-grid-item" onClick={() => (setSelected("s"))}>{emojiMap.get("s")}</button>
+                        <button className="map-grid-item" onClick={() => (setSelected("p"))}>{emojiMap.get("p")}</button>
+                        <button className="map-grid-item" onClick={() => (setSelected("b"))}>{emojiMap.get("b")}</button>
+                        <button className="map-grid-item" onClick={() => (setSelected("t"))}>{emojiMap.get("t")}</button>
                     </div>
                 </div>
                 <div className="map-buttons">
