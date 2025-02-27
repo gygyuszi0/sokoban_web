@@ -12,3 +12,8 @@ export const emojiMap = new Map([
     ["up",      "p"],
     ["down",    "p"],
 ]);
+
+export const checkMap = new Map([
+    [true,       String.fromCodePoint(0x2705)],
+    [false,      String()],
+]);

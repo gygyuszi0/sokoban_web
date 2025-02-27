@@ -475,7 +475,7 @@ export default function RouteComponent() {
         <>
             <Scripts></Scripts>
             <h1 className="sub-title">Play</h1>
-            <MapInfo name={data?.mapName} score={StepCount}></MapInfo>
+            <MapInfo name={data?.mapName} score={StepCount} shift={IsShift}></MapInfo>
             <Message msg={MessageState}></Message>
 
             <div className="map-page">
