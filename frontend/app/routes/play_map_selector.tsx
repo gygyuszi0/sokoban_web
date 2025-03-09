@@ -43,7 +43,6 @@ export default function RouteComponent() {
     return (
         <>
             <h1 className="sub-title">Select map</h1>
-            <p>Map = {data.length}</p>
             <div className="map-page">
                 <div className="map-list">
                     <div className="map-header">

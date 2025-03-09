@@ -106,7 +106,6 @@ export default function RouteComponent() {
     return (
         <>
             <h1 className="sub-title">Create map</h1>
-            <p>Slected : {selected}</p>
             <div className="create-map-content">
                 <div className="map-grid">
                     <MapGrid width={width} height={height} labels={buttonLabels} />
