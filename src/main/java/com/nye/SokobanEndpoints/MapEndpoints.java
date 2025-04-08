@@ -1,4 +1,6 @@
 package com.nye.SokobanEndpoints;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +37,10 @@ public class MapEndpoints {
     ReadMapResponse readMap(@PathVariable("id") Long id){
         ReadMapRequest readMapRequest = ReadMapRequest.builder().id(id).build();
         return  mapService.readMap(readMapRequest);
+    }
+    @GetMapping("/read_all")
+    List<ReadMapResponse> readAllMap(){
+        return  mapService.readAllMap();
     }
     @PutMapping("/update/{id}")
     UpdateMapResponse updateMap(@PathVariable("id") Long id, @RequestBody @Valid UpdateMapRequest newMap){

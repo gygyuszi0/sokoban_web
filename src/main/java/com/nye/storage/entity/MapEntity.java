@@ -33,12 +33,12 @@ public class MapEntity {
     @NotNull
     private String mapContent;
 
-    /**
-     * X coordinate of player.
-     */
     @NotNull
-    private Integer startCoordinateX;
+    private String mapName;
 
     @NotNull
-    private Integer startCoordinateY;
+    private Integer widht;
+    
+    @NotNull
+    private Integer height;
 }

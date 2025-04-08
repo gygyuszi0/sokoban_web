@@ -8,7 +8,7 @@
             "type": "java",
             "name": "Launch Java Program",
             "request": "launch",
-            "mainClass": "com.nye.sokoban_web.SokobanWebApplication"
+            "mainClass": "com.nye.Main"
         }
     ]
 }

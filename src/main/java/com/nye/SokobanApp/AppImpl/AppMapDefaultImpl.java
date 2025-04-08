@@ -1,8 +1,11 @@
 package com.nye.SokobanApp.AppImpl;
 
+import java.util.List;
+
 import com.nye.storage.entity.CoordinateEntity;
 import com.nye.storage.entity.MapEntity;
 import com.nye.storage.service.MapStorage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +26,11 @@ public class AppMapDefaultImpl implements AppMapInterface {
 
     @Override
     public CreateMapResponse createMap(CreateMapRequest map) {
-        CoordinateEntity coordinate = CoordinateEntity.builder()
-                .x(map.getStartCoordinate().getX())
-                .y(map.getStartCoordinate().getY())
-                .build();
         MapEntity request = MapEntity.builder()
+                .mapName(map.getMapName())
                 .mapContent(map.getMapContent())
-                .startCoordinateX(coordinate.getX())
-                .startCoordinateY(coordinate.getY())
+                .widht(map.getWidth())
+                .height(map.getHeight())
                 .build();
         MapEntity response = mapStorage.save(request);
         CreateMapResponse result = CreateMapResponse.builder().
@@ -50,9 +50,11 @@ public class AppMapDefaultImpl implements AppMapInterface {
     public ReadMapResponse readMap(ReadMapRequest map) {
         MapEntity entity = mapStorage.findById(map.getId()).orElseThrow();
         ReadMapResponse response = ReadMapResponse.builder()
+                .id(entity.getId())
+                .mapName(entity.getMapName())
                 .mapContent(entity.getMapContent())
-                .startCoordinateX(entity.getStartCoordinateX())
-                .startCoordinateY(entity.getStartCoordinateY())
+                .width(entity.getWidht())
+                .height(entity.getHeight())
                 .build();
         return response;
     }
@@ -61,16 +63,33 @@ public class AppMapDefaultImpl implements AppMapInterface {
     public UpdateMapResponse updateMap(UpdateMapRequest map) {
         MapEntity entity = MapEntity.builder()
                 .id(map.getId())
+                .mapName(map.getMapName())
                 .mapContent(map.getMapContent())
-                .startCoordinateX(map.getStartCoordinateX())
-                .startCoordinateY(map.getStartCoordinateY())
+                .widht(map.getWidth())
+                .height(map.getHeight())
                 .build();
-        mapStorage.deleteById(map.getId());
         entity = mapStorage.save(entity);
         UpdateMapResponse response = UpdateMapResponse.builder()
                 .id(entity.getId())
                 .build();
         return response;
     }
-    
+
+    @Override
+    public List<ReadMapResponse> readAllMap() {
+        List<MapEntity> result = (List<MapEntity>) mapStorage.findAll();
+        if (!result.isEmpty()) {
+            return result.stream().map(currentMap -> ReadMapResponse.builder()
+                    .id(currentMap.getId())
+                    .mapName(currentMap.getMapName())
+                    .mapContent(currentMap.getMapContent())
+                    .width(currentMap.getWidht())
+                    .height(currentMap.getHeight())
+                    .build()
+            ).toList();
+        }
+
+        return List.of();
+    }
+
 }
