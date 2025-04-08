@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply bg-black bg-gray-200;
+}
+
+nav {
+  @apply flex flex-row gap-4 p-4 bg-gray-400;
+}
+
+.logged-out-side-bar {
+  @apply flex flex-col bg-gray-300 h-full; 
+}
+
+.logged-out-side-bar-heading{
+  @apply font-bold text-gray-600 p-4 w-full border-4 border-gray-300 border-b-green-600;
+}
+
+.logged-out-side-bar-content {
+  @apply flex flex-row p-4;
+}
+
+.button-style{
+  @apply bg-green-600 text-white rounded p-4 w-full text-center hover:bg-green-700
+}
+
+.login-page ,
+.register-page,
+.dimensions-page{
+  @apply flex justify-center items-center p-4 w-full h-full;
+}
+
+.login-window,
+.register-window,
+.dimensions-window {
+  @apply bg-gray-400 p-4 w-2/5 h-4/5 rounded shadow-md;
+}
+
+.login_form ,
+.register_form,
+.dimensions_form
+{
+  @apply flex flex-col p-4 gap-4;
+}
+
+.score-page,
+.map-page { 
+  @apply flex flex-col p-4 gap-4;
+}
+
+.score-list,
+.map-list {
+  @apply flex flex-col gap-4
+    rounded-md
+    p-4
+    max-h-svh
+    overflow-auto
+    bg-gray-300;
+}
+
+.score-header,
+.map-header {
+  @apply flex flex-row gap-2 p-2
+    divide-x
+    rounded-t-md
+    text-white
+    bg-green-600
+}
+
+.header-item {
+  @apply text-lg italic 
+    min-w-24
+    p-2;
+}
+
+.score-item,
+.map-item {
+  @apply flex flex-row gap-2 p-2;
+}
+
+.score-item-field,
+.map-item-field {
+  @apply text-lg p-2
+    min-w-24
+    bg-gray-200;
+}
+
+.text-field-style{
+  @apply p-2 w-full rounded border-2 border-gray-300;
+}
+
+.dashboard-content{
+  @apply grid grid-cols-2 p-4 gap-4 justify-items-center ;
+}
+
+.dashboard-item {
+  @apply flex flex-col 
+    p-4 gap-4 
+    w-64 h-64 
+    rounded
+    shadow-md
+    bg-orange-300;
+}
+
+.dashboard-item-title {
+  @apply text-lg font-bold text-gray-600
+    h-1/6;
+}
+
+.dashboard-item-img {
+  @apply h-5/6;
+}
+
+.sub-title {
+  @apply font-bold text-gray-600 
+    w-full p-2
+    bg-gray-300;
+}
+
+.create-map-content {
+  @apply flex flex-col p-4 gap-4 
+    w-full max-w-4xl
+    h-full max-h-svh;
+}
+
+.map-grid{
+  @apply flex flex-col 
+    gap-2 p-4
+    w-full max-w-4xl
+    h-full max-h-svh
+    overflow-auto
+    bg-gray-100;
+}
+
+.map-grid-line,
+.map-items-line {
+  @apply flex flex-row gap-2;
+}
+.map-grid-item{
+  @apply w-8 h-8 
+    bg-gray-300 rounded
+    text-center;
+}
+
+.map-items {
+  @apply flex flex-col 
+    p-4 gap-4 
+    w-full h-auto
+    bg-gray-100;
+}
+
+
+.map-buttons {
+  @apply flex flex-row
+    justify-end 
+    gap-4 p-4
+    w-full h-auto
+    bg-gray-100;
+}
+
+.map-button {
+  @apply flex flex-col
+    w-auto h-auto
+    p-2 
+    rounded
+    shadow-md
+    bg-zinc-500;
+}
+
+.play-navigation-container{
+    @apply flex flex-col
+        m-4 p-4 gap-2
+        bg-gray-100
+}
+
+.play-navigation {
+    @apply flex flex-row gap-2
+        justify-end
+}
+
+.play-navigation-button {
+    @apply w-16 bg-gray-400
+        rounded
+        shadow-md
+}
+
+.play-navigation-button-hidden {
+    @apply w-16
+}
+
+.message-container {
+    @apply flex flex-row 
+    w-full p-2 gap-2
+    bg-gray-100
+}
+
+.message-text {
+    @apply w-full
+}
+
+.message-button {
+    @apply bg-green-600
+        p-2
+        rounded
+        shadow-md
+}
+
+.map-info-container {
+    @apply flex flex-row
+        p-2 gap-2
+        bg-gray-100
+        shadow-md
+}
+
+.map-info-label {
+    @apply font-bold text-sm
+}
+
+.map-info-value {
+    @apply text-sm
+}
+
+.rule-apge {
+    @apply flex flex-col p-4 gap-4 m-4
+        rounded
+        shadow-md
+        bg-gray-100
+}
+
+.rule-section {
+    @apply bg-green-600 p-2
+        rounded-t
+}
+
+.rule-content {
+    @apply bg-gray-200 p-2
+        rounded-b
+}
+
+li {
+    @apply list-disc m-8
+}
+
+p {
+    @apply p-2
+}
