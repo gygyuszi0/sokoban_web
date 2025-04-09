@@ -7,3 +7,6 @@ sudo apt install npm openjdk-17-jdk postgresql maven -y
 # cd sokoban_web
 
 mvn package
+
+cd frontend
+npm install
