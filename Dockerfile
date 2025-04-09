@@ -12,7 +12,8 @@ COPY install_docker.sh /
 
 
 RUN sh install_docker.sh
+COPY run_docker.sh /
 
 EXPOSE 5137
 
-CMD [ "sh run.sh" ]
+CMD [ "sh",  "run_docker.sh" ]
