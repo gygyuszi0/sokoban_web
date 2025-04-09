@@ -3,10 +3,10 @@
 sudo apt install git -y
 sudo apt install npm openjdk-17-jdk postgresql maven -y
 
-# git clone https://github.com/gygyuszi0/sokoban_web.git
-# cd sokoban_web
-
+#Config backend
+sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password 'root';"
 mvn package
 
 cd frontend
 npm install
+cd ..
