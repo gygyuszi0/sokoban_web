@@ -1,7 +1,6 @@
 #! /bin/bash
 
 apt update
-apt install git -y
 apt install npm openjdk-17-jdk postgresql maven -y
 
 #Config backend
