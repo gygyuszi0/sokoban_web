@@ -20,3 +20,13 @@ amely semmilyen perzisztens adatot nem tárol és nem olvas be.
     ``` sh
     \. run.sh
     ```
+
+Egy előre telepített debian image elérhető az alábbi linken, 
+amely `VirtualBox Version 7.1.4 r165100 (Qt6.5.3)` verzióval készült.
+
+Az image nem tartalmazza a forráskódot, 
+a szoftver a fentebbi lépések segítségével hozható működésbe.
+
+Az egyetlen elérhető felhasználó jelszava `admin`
+
+[letöltő link]
