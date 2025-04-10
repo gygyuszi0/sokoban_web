@@ -14,22 +14,9 @@ amely semmilyen perzisztens adatot nem tárol és nem olvas be.
 3. Ezen repository klónozása HTTPS segítségével.
 4. Szükséges csomagok telepítése és fordítása
     ``` sh
-    sh install.sh
+    \. install.sh
     ```
 5. A szoftver indítása
     ``` sh
-    sh run.sh
-    ```
-
-### 1.2. Docker változat
-
-1. Docker konfigurálása a host OS-nek megfelelően.
-2. Ezen repository klónozása
-3. A repository gyökerében a docker-image buildelése
-    ``` sh
-    docker 
-    ```
-4. Az elkészült image futtatása
-    ``` sh
-    docker
+    \. run.sh
     ```
