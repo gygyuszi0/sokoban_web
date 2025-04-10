@@ -10,7 +10,7 @@ FRONTEND=$!
 cd ..
 
 sleep 5
-read -n 1 -p "Press any key to close applications ..."
+read -s -n 1 -p "Press any key to close applications ..."
 echo "close frontend : ${FRONTEND}"
 kill -9 ${FRONTEND}
 sleep 5
