@@ -20,3 +20,16 @@ amely semmilyen perzisztens adatot nem tárol és nem olvas be.
     ``` sh
     sh run.sh
     ```
+
+### 1.2. Docker változat
+
+1. Docker konfigurálása a host OS-nek megfelelően.
+2. Ezen repository klónozása
+3. A repository gyökerében a docker-image buildelése
+    ``` sh
+    docker 
+    ```
+4. Az elkészült image futtatása
+    ``` sh
+    docker
+    ```
