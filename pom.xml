@@ -105,7 +105,8 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        ${project.groupId}.${project.artifactId}.Main
+                                        <!-- src/main/java/com/nye/Main.java -->
+                                        com.nye.Main
                                     </mainClass>
                                 </manifest>
                             </archive>
