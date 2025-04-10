@@ -29,4 +29,4 @@ a szoftver a fentebbi lépések segítségével hozható működésbe.
 
 Az egyetlen elérhető felhasználó jelszava `admin`
 
-[letöltő link]
+[letöltő link](https://mega.nz/file/dqhhSLiJ#iJ2vnyD7As6FFMQWhmKLTzilNL7nf5AkWC8zjAP7Wbo)
